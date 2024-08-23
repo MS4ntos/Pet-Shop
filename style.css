@@ -377,7 +377,7 @@ h1{
     border-radius: 20px;
     box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
     width: 12%;
-    height: 50rcap;
+    height: 80rcap;
     margin-left: 20%;
    }
 
@@ -404,12 +404,12 @@ h1{
 
    .botao2{
     width: 80%;
-    height: 10%;
+    height: 20%;
     border: 1px solid;
     border-color: rgb(79, 207, 19);
     border-radius: 25px;
     padding: 10px;
-    margin-left: 20px;
+    margin-left: 25px;
     background: white;
     color: rgb(123, 218, 45);
     font-size: 15px;
@@ -428,4 +428,62 @@ h1{
     margin-left: 20px;
     font-size: 12px;
    }
+
+   .botao3{
+    margin-left: 30px;
+    width: 80%;
+    height: 2.5rcap;
+    color: rgb(149, 85, 223);
+   }
+
+   .preco{
+    color: rgb(149, 85, 223);
+    margin-left: 20px;
+   }
+
+   .preco2{
+    color: black;
+   }
+
+   .botao4{
+    margin-left: 30px;
+    width: 80%;
+    height: 2.5rcap;
+    border-radius: 20px;
+    background: rgb(118, 175, 33);
+    color: rgb(127, 19, 177);
+    border: 1px solid;
+    border-color: rgb(65, 6, 92);
+    box-shadow: -5px 5px;
+    
+   }
+
+   .botao4:hover{
+    background: white;
+    cursor: pointer;
+    transition: 0.5s;
+    
+   }
    
+   .descricao-cashback{
+    margin-left: 25px;
+    margin-top: 30px;
+    color: gray;
+   }
+
+   .botao5{
+
+    margin-left: 30px;
+    width: 80%;
+    height: 5rcap;
+    border-radius: 20px;
+    margin-top: 30px;
+    background: rgb(97, 153, 14);
+    color: white;
+   }
+
+   .botao5:hover{
+    background: rebeccapurple;
+    cursor: pointer;
+    transition: 0.5s;
+   }
