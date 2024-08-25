@@ -3,21 +3,29 @@
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
-    width: 100%;
-    height: 200%;
-   
+    margin-left: 20%;
+}
+
+.fundo-pet{
+    background:linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgb(34, 224, 27) 70%);
+    
 }
 .cabeçalho{
     display: flex;
-     width: 50%;
-     margin-left: 25%;
+     height: 10rcap;
+     color: white;
 }
+
+.logo{
+    width: 30%;
+}
+
 .botao{
     width: 20%;
     height: 10%;
     box-sizing: border-box;
     border: 2px solid;
-    border-color: rgb(0, 0, 0);
+    border-color: rgb(42, 185, 14);
     border-radius: 25px;
     padding: 10px;
    
@@ -26,35 +34,56 @@
 .navegacao{
     display: flex;
     justify-content:center;
-    align-items: center;
     width: 100%;
     height: 50px;
     font-size: 20px;
     margin-right: 50%;
 }
 
+a{
+  text-decoration: none;
+  color: #fafafa;
+}
+a:hover{
+  text-decoration: none;
+  margin-right: 35px;
+  color: #08a730;
+}
+
+
+ul:hover{
+  background: rgb(255, 255, 255);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+    cursor: pointer;
+    transition: 0.5s;
+    border-radius: 20px;
+    margin-left: 30px;
+    width: 40px;
+    height: 2rcap;
+    
+}
+
+
 .fundo-nav{
-    background: rgb(149, 85, 223);
+    background:linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgb(34, 224, 27) 100%);
     color: rgb(247, 242, 242);
 }
 
 .imagem-boneco{
     display: flex;
-    left: 25px;
     justify-content: center;
     align-items: center;
     font-family: Arial, sans-serif;
-   
-   
+    
 }
-.imagem-boneco :hover{
-    border: solid;
-    border-color: rgb(243, 238, 238);
-    background: white;
-}
+
 .boneco{
-    width: 50px;
+    width: 500%;
+    height: 15rcap;
     padding: 25px;
+    
    
 }
 
@@ -80,24 +109,29 @@
     font-family: Arial, sans-serif;
 }
 
-
-
-
-
-
-
-
-
+.watts{
+    width: 110px;
+    
+}
 
 .carrinho{
-    width: 80px;
+    width: 100px;
    
 }
+
+
+
+
+
+
+
+
+
 
 .fundo-cards{
     font-size: 15px;
     width: 10px;
-    
+   
 
 }
 
@@ -106,13 +140,14 @@
     align-items: center;
     justify-content: center;
     padding: 10px;
-    background: white;
+    background: beige;
     border: solid;
     border-color: rgb(243, 238, 238);
     border-radius: 15px;
     width: 25%;
     height: 50px;
     margin-top: 10px;
+    
 }
 
 .fundo-card2{
@@ -120,7 +155,7 @@
     align-items: center;
     justify-content: center;
      padding: 10px;
-     background: white;
+     background: beige;
      border: solid;
      border-color: rgb(243, 238, 238);
      border-radius: 15px;
@@ -136,7 +171,7 @@
     align-items: center;
     justify-content: center;
      padding: 10px;
-     background: white;
+     background: beige;
      border: solid;
      border-color: rgb(243, 238, 238);
      border-radius: 15px;
@@ -152,7 +187,7 @@
     align-items: center;
     justify-content: center;
      padding: 10px;
-     background: white;
+     background: beige;
      border: solid;
      border-color: rgb(243, 238, 238);
      border-radius: 15px;
@@ -168,7 +203,7 @@
     align-items: center;
     justify-content: center;
      padding: 10px;
-     background: white;
+     background: beige;
      border: solid;
      border-color: rgb(243, 238, 238);
      border-radius: 15px;
@@ -184,7 +219,7 @@
     align-items: center;
     justify-content: center;
      padding: 10px;
-     background: white;
+     background: beige;
      border: solid;
      border-color: rgb(243, 238, 238);
      border-radius: 15px;
@@ -231,10 +266,30 @@
 
 
 
+.fundo-categorias{
+   
+    color: rgb(10, 10, 10);
+}
+.plano-categoria{
+   
+    color: rgb(255, 248, 248);
+    margin-bottom: -2rcap;
+}
+.plano-especies{
+    background: beige;
+    color: rgb(0, 0, 0);
+    margin-top: -2rcap;
+    margin-bottom: -2rcap;
+    
+}
+
 .Categorias-Populares{
     display: flex;
     justify-content: center;
-   
+    color: white;
+    
+  
+    
 }
 
 h1{
@@ -244,22 +299,58 @@ h1{
 
 .cachorro{
    width: 75%;
+   height: 15rcap;
    margin-left: 20px;
+   border-radius: 40px;
    
+}
+.cachorro:hover{
+  cursor: pointer;
+    transition: 0.5s;
+    border-radius: 20px;
+    border-color: wheat;
+    border: 2px solid;
 }
 .gato{
     width: 75%;
     margin-left: 20px;
+    border-radius: 40px;
+    height: 15rcap;
+}
+.gato:hover{
+  cursor: pointer;
+  transition: 0.5s;
+  border-radius: 20px;
+  border-color: wheat;
+  border: 2px solid;
 }
 
 .acessorios{
     width: 75%;
     margin-left: 20px;
+    border-radius: 40px;
+    height: 15rcap;
+}
+.acessorios:hover{
+  cursor: pointer;
+  transition: 0.5s;
+  border-radius: 20px;
+  border-color: wheat;
+  border: 2px solid;
 }
 
-.farmacia{
+.Servicos{
     width: 75%;
     margin-left: 20px;
+    border-radius: 40px;
+    height: 15rcap;
+}
+.Servicos:hover{
+  cursor: pointer;
+  transition: 0.5s;
+  border-radius: 20px;
+  border-color: wheat;
+  border: 2px solid;
 }
 
 
@@ -281,111 +372,47 @@ h1{
     margin-right: 20px;
 }
 
-.texto-farmacia{
+.texto-servico{
     display: flex;
     justify-content: center;
     margin-right: 20px;
 }
 
 
-.foto-produto{
-    display: flex;
-    justify-content: center;
-    margin-top: 40px;
+
+
+
+
+
+
+
+.fundo-produtos{
+  background:linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 40%, rgb(34, 224, 27) 111%);
     
 }
-
-.foto-produto-gato{
-    margin-left: 25px;
-}
-
-
-.Categorias-Especies{
-    display: flex;
-    justify-content: center;
-}
-
-
-
-
-
-
-
-
-
-
-h1{
-    margin-left: 21%;
-    font-size: xx-large;
-   }
-   
-   .dog{
-      width: 75%;
-      margin-left: 20px;
-      
-   }
-   .cat{
-       width: 75%;
-       margin-left: 20px;
-   }
-   
-   .aves{
-       width: 75%;
-       margin-left: 20px;
-   }
-   
-   .peixe{
-       width: 75%;
-       margin-left: 20px;
-   }
-   
-   
-   .texto-racao-dog{
-       display: flex;
-       justify-content: center;
-       margin-right: 10px;
-   }
-   
-   .texto-racao-cat{
-       display: flex;
-       justify-content: center;
-       margin-right: 20px;
-   }
-   
-   .texto-aves{
-       display: flex;
-       justify-content: center;
-       margin-right: 20px;
-   }
-   
-   .texto-peixe{
-       display: flex;
-       justify-content: center;
-       margin-right: 20px;
-   }
-
-
-
-
-
-
-
-
-
    .fundo-cards-produtos{
-    background: white;
-    border-radius: 20px;
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
-    width: 12%;
-    height: 80rcap;
-    margin-left: 20%;
+   
+   display: flex;
+    align-items: center;
+    justify-content: center;
+  
    }
 
-   .fundo-cards-produtos:hover{
+   .plano-produtos:hover{
      border: 2px solid;
       border-color: blueviolet;
       cursor: pointer;
      transition: 0.5s;
+   }
+   .plano-produtos{
+    
+    background: beige;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+    width: 15%;
+    height: 45rcap;
+    margin-left: 60px;
+
    }
 
    .texto-desconto{
@@ -398,8 +425,12 @@ h1{
    }
 
    .imagem-racao{
-     width: 80%;
-     margin-left: 23px;
+    width: 80%;
+    height: 10rcap;
+    margin-top: 20px;
+    margin-left: 23px;
+    border-radius: 20px;
+
    }
 
    .botao2{
@@ -429,24 +460,16 @@ h1{
     font-size: 12px;
    }
 
-   .botao3{
-    margin-left: 30px;
-    width: 80%;
-    height: 2.5rcap;
-    color: rgb(149, 85, 223);
-   }
-
    .preco{
     color: rgb(149, 85, 223);
     margin-left: 20px;
    }
 
-   .preco2{
-    color: black;
-   }
+   
 
    .botao4{
     margin-left: 30px;
+    margin-top: 45px;
     width: 80%;
     height: 2.5rcap;
     border-radius: 20px;
@@ -465,15 +488,11 @@ h1{
     
    }
    
-   .descricao-cashback{
-    margin-left: 25px;
-    margin-top: 30px;
-    color: gray;
-   }
 
    .botao5{
 
-    margin-left: 30px;
+    margin-left: 25px;
+    
     width: 80%;
     height: 5rcap;
     border-radius: 20px;
@@ -483,7 +502,323 @@ h1{
    }
 
    .botao5:hover{
-    background: rebeccapurple;
+    background: rgb(35, 9, 182);
+    cursor: pointer;
+    transition: 0.5s;
+   }
+
+
+
+  .plano-acessorios{
+    background: beige;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+    width: 15%;
+    height: 45rcap;
+    margin-right: 20px;
+    margin-left: 20px;
+    
+  }   
+
+  .plano-acessorios:hover{
+    border: 2px solid;
+     border-color: blueviolet;
+     cursor: pointer;
+    transition: 0.5s;
+  }
+
+  .texto-desconto2{
+    border-radius: 15px;
+    background: rgb(123, 218, 45);
+    color: white;
+    width: 80px;
+    margin-left: 10px;
+  }
+
+  .imagem-acessorio{
+    width: 80%;
+    height: 10rcap;
+    margin-top: 20px;
+    margin-left: 23px;
+    border-radius: 20px;
+
+
+  }
+  .botao3{
+    width: 80%;
+    height: 20%;
+    border: 1px solid;
+    border-color: rgb(79, 207, 19);
+    border-radius: 25px;
+    padding: 10px;
+    margin-left: 25px;
+    background: white;
+    color: rgb(123, 218, 45);
+    font-size: 15px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    border-radius: 20px;
+    margin-top: 20px;
+  }
+
+  .botao3:hover{
+    background: rgb(123, 218, 45);
+    color: white;
+    cursor: pointer;
+    transition: 0.5s;
+   }
+
+  .descricao-produto2{
+    margin-left: 20px;
+    font-size: 12px;
+  }
+
+  .preco2{
+    color: black;
+    margin-left: 20px;
+  }
+
+  .botao6{
+    margin-left: 30px;
+    margin-top: 25px;
+    width: 80%;
+    height: 2.5rcap;
+    border-radius: 20px;
+    background: rgb(118, 175, 33);
+    color: rgb(127, 19, 177);
+    border: 1px solid;
+    border-color: rgb(65, 6, 92);
+    box-shadow: -5px 5px;
+  }
+  .botao6:hover{
+    background: white;
+    cursor: pointer;
+    transition: 0.5s;
+  }
+
+
+  .botao7{
+    margin-left: 25px;
+    width: 80%;
+    height: 5rcap;
+    border-radius: 20px;
+    margin-top: 30px;
+    background: rgb(97, 153, 14);
+    color: white;
+  }
+
+  .botao7:hover{
+    background: rgb(35, 9, 182);
+    cursor: pointer;
+    transition: 0.5s;
+   }
+
+
+
+
+   .plano-servicos{
+    background: beige;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+    width: 15%;
+    height: 45rcap;
+    
+  }   
+
+  .plano-servicos:hover{
+    border: 2px solid;
+     border-color: blueviolet;
+     cursor: pointer;
+    transition: 0.5s;
+  }
+
+  .texto-desconto3{
+    border-radius: 15px;
+    background: rgb(123, 218, 45);
+    color: white;
+    width: 80px;
+    margin-left: 10px;
+  }
+
+  .imagem-servico{
+    width: 80%;
+    height: 10rcap;
+    margin-top: 20px;
+    margin-left: 23px;
+    border-radius: 20px;
+
+  }
+  .botao8{
+    width: 80%;
+    height: 20%;
+    border: 1px solid;
+    border-color: rgb(79, 207, 19);
+    border-radius: 25px;
+    padding: 10px;
+    margin-left: 25px;
+    background: white;
+    color: rgb(123, 218, 45);
+    font-size: 15px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    border-radius: 20px;
+    margin-top: 20px;
+  }
+
+  .botao8:hover{
+    background: rgb(123, 218, 45);
+    color: white;
+    cursor: pointer;
+    transition: 0.5s;
+   }
+
+  .descricao-produto3{
+    margin-left: 20px;
+    font-size: 12px;
+  }
+
+  .preco3{
+    color: black;
+    margin-left: 20px;
+  }
+
+  .botao9{
+    margin-left: 30px;
+    margin-top: 20px;
+    width: 80%;
+    height: 2.5rcap;
+    border-radius: 20px;
+    background: rgb(118, 175, 33);
+    color: rgb(127, 19, 177);
+    border: 1px solid;
+    border-color: rgb(65, 6, 92);
+    box-shadow: -5px 5px;
+  }
+  .botao9:hover{
+    background: white;
+    cursor: pointer;
+    transition: 0.5s;
+  }
+
+
+  .botao10{
+    margin-left: 25px;
+    width: 80%;
+    height: 5rcap;
+    border-radius: 20px;
+    margin-top: 33px;
+    background: rgb(97, 153, 14);
+    color: white;
+  }
+
+  .botao10:hover{
+    background: rgb(35, 9, 182);
+    cursor: pointer;
+    transition: 0.5s;
+   }
+
+
+
+
+
+
+
+
+   .plano-racao-gato{
+    background: beige;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+    width: 15%;
+    height: 45rcap;
+    margin-left: 15px;
+  }   
+
+  .plano-racao-gato:hover{
+    border: 2px solid;
+     border-color: blueviolet;
+     cursor: pointer;
+    transition: 0.5s;
+  }
+
+  .texto-desconto4{
+    border-radius: 15px;
+    background: rgb(123, 218, 45);
+    color: white;
+    width: 80px;
+    margin-left: 10px;
+  }
+
+  .imagem-racao-gato{
+    width: 80%;
+    height: 10rcap;
+    margin-top: 20px;
+    margin-left: 23px;
+    border-radius: 20px;
+
+
+  }
+  .botao11{
+    width: 80%;
+    height: 20%;
+    border: 1px solid;
+    border-color: rgb(79, 207, 19);
+    border-radius: 25px;
+    padding: 10px;
+    margin-left: 25px;
+    background: white;
+    color: rgb(123, 218, 45);
+    font-size: 15px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    border-radius: 20px;
+    margin-top: 20px;
+  }
+
+  .botao11:hover{
+    background: rgb(123, 218, 45);
+    color: white;
+    cursor: pointer;
+    transition: 0.5s;
+   }
+
+  .descricao-produto4{
+    margin-left: 20px;
+    font-size: 12px;
+  }
+
+  .preco4{
+    color: black;
+    margin-left: 20px;
+  }
+
+  .botao12{
+    margin-left: 30px;
+    margin-top: 20px;
+    width: 80%;
+    height: 2.5rcap;
+    border-radius: 20px;
+    background: rgb(118, 175, 33);
+    color: rgb(127, 19, 177);
+    border: 1px solid;
+    border-color: rgb(65, 6, 92);
+    box-shadow: -5px 5px;
+  }
+  .botao12:hover{
+    background: white;
+    cursor: pointer;
+    transition: 0.5s;
+  }
+
+
+  .botao13{
+    margin-left: 25px;
+    width: 80%;
+    height: 5rcap;
+    border-radius: 20px;
+    margin-top: 30px;
+    background: rgb(97, 153, 14);
+    color: white;
+  }
+
+  .botao13:hover{
+    background: rgb(35, 9, 182);
     cursor: pointer;
     transition: 0.5s;
    }

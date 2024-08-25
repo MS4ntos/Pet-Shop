@@ -1,0 +1,94 @@
+.papel-de-parede{
+
+    background:linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgb(34, 224, 27) 100%);
+    height: 90rcap;
+}
+
+.cabeçalho{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+
+}
+
+.navegacao{
+    display: flex;
+    justify-content:center;
+    width: 100%;
+    height: 50px;
+    font-size: 20px;
+    margin-right: 50%;
+    margin-top: 20px;
+}
+
+a{
+  text-decoration: none;
+  color: #fafafa;
+}
+a:hover{
+  text-decoration: none;
+  margin-right: 35px;
+  color: #08a730;
+}
+
+
+ul:hover{
+  background: rgb(255, 255, 255);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+    cursor: pointer;
+    transition: 0.5s;
+    border-radius: 20px;
+    margin-left: 30px;
+    width: 40px;
+    height: 2rcap;
+    
+}
+
+.fundo-nav{
+    
+    color: rgb(247, 242, 242);
+}
+
+
+
+.fundo-contato{
+    border-radius: 20px;
+    border-color: red;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 25px;
+}
+
+.fundo-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 40px;
+}
+
+button{
+    display: flex;
+    border-radius: 30px;
+}
+
+button:hover{
+    border-radius: 20px;
+    background: rgb(42, 7, 167);
+    color: white;
+    cursor: pointer;
+    transition: 0.5s;
+}
