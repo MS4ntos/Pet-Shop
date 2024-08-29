@@ -827,36 +827,4 @@ h1{
     margin-top: 10%;
    }
 
-   .fundo-carrinho{
-    background: rgb(255, 255, 255);
-    border-radius: 20px;
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
-    width: 30%;
-    height: 20rcap;
-    margin-left: 15px;
-    
-   }
-
-   .carrinho-titulo{
-    margin-left: 28%;
-   }
-
-   .carrinho-produtos{
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-   }
-
-   .carrinho2{
-    
-   
-    width: 30%;
-    height: 8rcap;
-    margin-top: 20px;
-    margin-left: 23px;
-   
-   }
-
-   
-
    
