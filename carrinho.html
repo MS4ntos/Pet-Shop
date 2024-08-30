@@ -63,18 +63,22 @@
      </nav>
      <section class="fundo-carrinho">
         
-        <p class="carrinho-titulo"> <h2>Produto</h2></p>
+        <article class="descricao-titulo">
+            <p>Produto</p>
+            <p>Preco</p>
+            <p>Quantidade</p>
+            <p>Sub Total</p>
+           </article>
+           
+        
         <article class="carrinho-produtos">
             
-            <img class="carrinho2" src="imagens/racao-gato-adulta.jpeg" alt="" >
-            <p class="descricao-carrinho">racao para gatos adultos</p>
+            <img class="imagem-carrinho" src="imagens/racao-gato-adulta.jpeg" alt="" >
+            <p>R$10,00</p>
+            <p>5</p>
+            <p>R$50,00</p>
         </article>
-        <article class="fundo-preco">
-            <hr>
-            <p class="carrinho-titulo2"><h2>Preco</h2></p>
-            <p class="preco-carrinho">R$ 10,00</p>
-
-        </article>
+        
         <article>
             <article class="fundo-botao">
 
@@ -88,14 +92,26 @@
        
            
         </article>
-        <article class="fundo-resumo">
+    
+     </section>
+
+     <section class="fundo-resumo">
+
+        <article class="resumo">
             <h2>Resumo do Pedido</h2>
-            <article class="resumo">
-                <p>Quantidade: 1</p>
-                <p>Subtotal: R$ 10,00</p>
-                <p>Frete: R$ 0,00</p>
-                <p>Total: R$ 10,00</p>
+            <article class="descricao-resumo">
+                <p>valor dos produtos 50,00</p>
+                <p>total: R$50,00</p>
+                <hr>
+                <p class="entrega">Entrega</p>
+                <p>calcule o frete: <br> <input type="text" name="frete" placeholder="Digite seu CEP"> <button>Atualizar</button></p>
+                
             </article>
+        </article>
+        <article>
+            <button class="botao4">
+                Finalizar Pedido
+            </button>
         </article>
 
 
