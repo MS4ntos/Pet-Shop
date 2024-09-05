@@ -1,8 +1,4 @@
-.papel-de-parede{
 
-    background:linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgb(34, 224, 27) 100%);
-    height: 90rcap;
-}
 
 .cabeçalho{
     display: flex;
@@ -11,7 +7,9 @@
     height: 100px;
 
 }
-
+.logo2{
+    width: 500px;
+}
 .navegacao{
     display: flex;
     justify-content:center;
@@ -20,6 +18,7 @@
     font-size: 20px;
     margin-right: 50%;
     margin-top: 20px;
+    background: orangered;;
 }
 
 a{
@@ -29,7 +28,7 @@ a{
 a:hover{
   text-decoration: none;
   margin-right: 35px;
-  color: #08a730;
+  color: orangered;
 }
 
 
@@ -52,43 +51,73 @@ ul:hover{
     color: rgb(247, 242, 242);
 }
 
-
+.fundo2{
+background: rgb(231,60,3);
+background: linear-gradient(90deg, rgba(231,60,3,1) 26%, rgba(255,158,0,1) 92%);
+    height: 63rcap;
+    
+    
+}
 
 .fundo-contato{
-    border-radius: 20px;
-    border-color: red;
-    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    margin-left: 25%;
+    width:25%;
+    margin-left: 38%;
     margin-top: 25px;
 }
 
 .fundo-form{
+    background: white;
+    border-radius: 20px;
+    border-color: red;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 30px;
+    
 }
 
 h1{
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
+    color: rgb(0, 0, 0);
     font-size: 40px;
 }
 
 button{
     display: flex;
+   
     border-radius: 30px;
+    background: rgb(231,60,3);
+    background: linear-gradient(90deg, rgba(231,60,3,1) 26%, rgba(255,158,0,1) 92%);
+    height: 50px;
+    width: 150px;
+    font-size: 35px;
+    font-style: italic;
+    color: white;
+    
 }
 
 button:hover{
     border-radius: 20px;
-    background: rgb(42, 7, 167);
-    color: white;
+    background: rgb(231,60,3);
+    background: linear-gradient(180deg, rgba(231,60,3,1) 26%, rgba(255,158,0,1) 92%);
     cursor: pointer;
     transition: 0.5s;
 }
+
+input{
+    border-radius: 20px;
+    font-size: 18px;
+}
+
+h2{
+    font-size: 15px;
+}
+
+
+  ::placeholder{
+    font-size: 12px;
+    
+  }

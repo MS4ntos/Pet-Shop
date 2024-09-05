@@ -1,7 +1,3 @@
-.papel-de-parede{
-
-    background:linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgb(34, 224, 27) 100%);
-}
 
 .cabeçalho{
     display: flex;
@@ -11,6 +7,9 @@
 
 }
 
+.logo2{
+    width: 500px;
+}
 .navegacao{
     display: flex;
     justify-content:center;
@@ -19,6 +18,7 @@
     font-size: 20px;
     margin-right: 50%;
     margin-top: 20px;
+    background: orangered;
 }
 
 a{
@@ -28,7 +28,7 @@ a{
 a:hover{
   text-decoration: none;
   margin-right: 35px;
-  color: #08a730;
+  color: orangered;
 }
 
 
@@ -51,11 +51,6 @@ ul:hover{
     color: rgb(247, 242, 242);
 }
 
-fundo-produtos{
-    background:linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 40%, rgb(34, 224, 27) 111%);
-      
-  }
-
 
 
 
@@ -70,7 +65,7 @@ fundo-produtos{
   
      .plano-produtos:hover{
        border: 2px solid;
-        border-color: blueviolet;
+        border-color: orangered;
         cursor: pointer;
        transition: 0.5s;
      }
@@ -87,7 +82,7 @@ fundo-produtos{
   
      .texto-desconto{
       border-radius: 15px;
-      background: rgb(123, 218, 45);
+      background: orangered;
       color: white;
       width: 80px;
       margin-left: 10px;
@@ -103,35 +98,16 @@ fundo-produtos{
   
      }
   
-     .botao2{
-      width: 80%;
-      height: 20%;
-      border: 1px solid;
-      border-color: rgb(79, 207, 19);
-      border-radius: 25px;
-      padding: 10px;
-      margin-left: 25px;
-      background: white;
-      color: rgb(123, 218, 45);
-      font-size: 15px;
-      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-      border-radius: 20px;
-     }
+     
   
-     .botao2:hover{
-      background: rgb(123, 218, 45);
-      color: white;
-      cursor: pointer;
-      transition: 0.5s;
-     }
-  
+     
      .descricao-produto{
       margin-left: 20px;
       font-size: 12px;
      }
   
      .preco{
-      color: rgb(149, 85, 223);
+      color: rgb(0, 0, 0);
       margin-left: 20px;
      }
   
@@ -143,16 +119,17 @@ fundo-produtos{
       width: 80%;
       height: 2.5rcap;
       border-radius: 20px;
-      background: rgb(118, 175, 33);
-      color: rgb(127, 19, 177);
+      background: rgb(255, 255, 255);
+      color: orangered;
       border: 1px solid;
-      border-color: rgb(65, 6, 92);
+      border-color: orangered;
       box-shadow: -5px 5px;
       
      }
   
      .botao4:hover{
-      background: white;
+      background: orangered;
+      color: white;
       cursor: pointer;
       transition: 0.5s;
       
@@ -167,12 +144,12 @@ fundo-produtos{
       height: 5rcap;
       border-radius: 20px;
       margin-top: 30px;
-      background: rgb(97, 153, 14);
-      color: white;
+      background: rgb(255, 255, 255);
+      color: rgb(0, 0, 0);
      }
   
      .botao5:hover{
-      background: rgb(35, 9, 182);
+      background: orangered;
       cursor: pointer;
       transition: 0.5s;
      }
@@ -192,14 +169,14 @@ fundo-produtos{
   
     .plano-acessorios:hover{
       border: 2px solid;
-       border-color: blueviolet;
+       border-color: orangered;
        cursor: pointer;
       transition: 0.5s;
     }
   
     .texto-desconto2{
       border-radius: 15px;
-      background: rgb(123, 218, 45);
+      background: orangered;
       color: white;
       width: 80px;
       margin-left: 10px;
@@ -214,29 +191,7 @@ fundo-produtos{
   
   
     }
-    .botao3{
-      width: 80%;
-      height: 20%;
-      border: 1px solid;
-      border-color: rgb(79, 207, 19);
-      border-radius: 25px;
-      padding: 10px;
-      margin-left: 25px;
-      background: white;
-      color: rgb(123, 218, 45);
-      font-size: 15px;
-      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-      border-radius: 20px;
-      margin-top: 20px;
-    }
-  
-    .botao3:hover{
-      background: rgb(123, 218, 45);
-      color: white;
-      cursor: pointer;
-      transition: 0.5s;
-     }
-  
+    
     .descricao-produto2{
       margin-left: 20px;
       font-size: 12px;
@@ -253,14 +208,15 @@ fundo-produtos{
       width: 80%;
       height: 2.5rcap;
       border-radius: 20px;
-      background: rgb(118, 175, 33);
-      color: rgb(127, 19, 177);
+      background: rgb(255, 255, 255);
+      color: orangered;
       border: 1px solid;
-      border-color: rgb(65, 6, 92);
+      border-color: orangered;
       box-shadow: -5px 5px;
     }
     .botao6:hover{
-      background: white;
+      background: orangered;
+      color: white;
       cursor: pointer;
       transition: 0.5s;
     }
@@ -272,12 +228,12 @@ fundo-produtos{
       height: 5rcap;
       border-radius: 20px;
       margin-top: 30px;
-      background: rgb(97, 153, 14);
-      color: white;
+      background: rgb(255, 255, 255);
+      color: rgb(0, 0, 0);
     }
   
     .botao7:hover{
-      background: rgb(35, 9, 182);
+      background:orangered;
       cursor: pointer;
       transition: 0.5s;
      }
@@ -296,14 +252,14 @@ fundo-produtos{
   
     .plano-servicos:hover{
       border: 2px solid;
-       border-color: blueviolet;
+       border-color: orangered;
        cursor: pointer;
       transition: 0.5s;
     }
   
     .texto-desconto3{
       border-radius: 15px;
-      background: rgb(123, 218, 45);
+      background: orangered;
       color: white;
       width: 80px;
       margin-left: 10px;
@@ -317,29 +273,7 @@ fundo-produtos{
       border-radius: 20px;
   
     }
-    .botao8{
-      width: 80%;
-      height: 20%;
-      border: 1px solid;
-      border-color: rgb(79, 207, 19);
-      border-radius: 25px;
-      padding: 10px;
-      margin-left: 25px;
-      background: white;
-      color: rgb(123, 218, 45);
-      font-size: 15px;
-      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-      border-radius: 20px;
-      margin-top: 20px;
-    }
-  
-    .botao8:hover{
-      background: rgb(123, 218, 45);
-      color: white;
-      cursor: pointer;
-      transition: 0.5s;
-     }
-  
+    
     .descricao-produto3{
       margin-left: 20px;
       font-size: 12px;
@@ -356,14 +290,15 @@ fundo-produtos{
       width: 80%;
       height: 2.5rcap;
       border-radius: 20px;
-      background: rgb(118, 175, 33);
-      color: rgb(127, 19, 177);
+      background: rgb(255, 255, 255);
+      color: orangered;
       border: 1px solid;
-      border-color: rgb(65, 6, 92);
+      border-color: orangered;
       box-shadow: -5px 5px;
     }
     .botao9:hover{
-      background: white;
+      background: orangered;
+      color: white;
       cursor: pointer;
       transition: 0.5s;
     }
@@ -375,12 +310,12 @@ fundo-produtos{
       height: 5rcap;
       border-radius: 20px;
       margin-top: 33px;
-      background: rgb(97, 153, 14);
-      color: white;
+      background: rgb(255, 255, 255);
+      color: rgb(0, 0, 0);
     }
   
     .botao10:hover{
-      background: rgb(35, 9, 182);
+      background: orangered;
       cursor: pointer;
       transition: 0.5s;
      }
@@ -395,6 +330,8 @@ h2{
 }
 
 h1{	
-    color: white;
+    color: rgb(0, 0, 0);
     margin-left: 10px;
+    display: flex;
+    justify-content: center;
 }

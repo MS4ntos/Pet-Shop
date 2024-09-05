@@ -6,11 +6,7 @@
     margin-left: 20%;
 }
 
-.fundo-pet{
-    background-image: url("imagens/foto-wind.webp");
-    height: 100rcap;
-    
-}
+
 .cabeçalho{
     display: flex;
      height: 10rcap;
@@ -26,7 +22,7 @@
     height: 10%;
     box-sizing: border-box;
     border: 2px solid;
-    border-color: rgb(42, 185, 14);
+    border-color: rgb(250, 122, 3);
     border-radius: 25px;
     padding: 10px;
    
@@ -41,6 +37,10 @@
     margin-right: 50%;
 }
 
+.fundo-nav{
+  background: orangered;
+}
+
 a{
   text-decoration: none;
   color: #fafafa;
@@ -48,7 +48,7 @@ a{
 a:hover{
   text-decoration: none;
   margin-right: 35px;
-  color: #08a730;
+  color: orangered
 }
 
 
@@ -78,9 +78,9 @@ ul:hover{
 }
 
 .boneco{
-    width: 500%;
+    width: 100%;
     height: 15rcap;
-    padding: 25px;
+    
     
    
 }
