@@ -7,116 +7,126 @@
     <link rel="stylesheet" href="carrinho.css">
 </head>
 <body>
-
-
-    
     <header class="cabeçalho">
         <div class="perfil">
-        <img class="logo" src="imagens/alpha pet.png" alt="">
-       
-        <input  class="botao"  name="query" placeholder="Procurar na Popular Pet " id="">
-        <div class="imagem-watts">
-            <img class="watts" src="imagens/icon-mensagem.png" alt="Central de atendimento ">
-            <p>Central de <br><b>atendimento</b></p>
+            <img class="logo" src="imagens/alpha pet.png" alt="">
+            <input class="botao" name="query" placeholder="Procurar na Popular Pet" id="">
+            <div class="imagem-watts">
+                <img class="watts" src="imagens/icon-mensagem.png" alt="Central de atendimento">
+                <p>Central de <br><b>atendimento</b></p>
+            </div>
+            <div class="imagem-boneco">
+                <a href="login.html"><img class="boneco" src="imagens/boneco.png" alt=""></a>
+                <p><b>Entre</b> ou <br><b>Cadastre-se</b></p>
+            </div>
+            <div class="imagem-carrinho">
+                <a href="carrinho.html"><img class="carrinho" src="imagens/carrinho.png" alt=""></a>
+            </div>
         </div>
-       
+    </header>
     
-    
-        <div class="imagem-boneco">
-    
-            <a href="login.html"><img class="boneco" src="imagens/boneco.png"  alt =""></a>
-            <p><b>Entre</b> ou <br><b>Cadastre-se</b></p>
-    
-        </div>
-    
-       <div>
-        <a href="carrinho.html"> <img  class="carrinho" src="imagens/carrinho.png" alt=""></a>
-        
-       </div>
-       
-     </div>
-    
-      </header>
-    
-    
-     <nav class="fundo-nav">
+    <nav class="fundo-nav">
         <div class="navegacao">
-        <ul>
-             <a href="index.html"   rel=""> Home </a> 
-        </ul>
-        <ul>
-            <a href="sobre.html"   rel=""> Sobre </a>
-        </ul>
-        <ul>
-            <a href="Servicos.html"   rel=""> Serviços </a>
-        </ul>
-        <ul>
-            <a href="produtos.html"   rel=""> Produtos </a>
-        </ul>
-        <ul>
-            <a href="contato.html"  rel=""> Contato </a>
-        
-        </ul>
-       <div>
-       
-       
-     </nav>
-     <section class="fundo-carrinho">
-        
+            <ul><a href="index.html"> Home </a></ul>
+            <ul><a href="sobre.html"> Sobre </a></ul>
+            <ul><a href="Servicos.html"> Serviços </a></ul>
+            <ul><a href="produtos.html"> Produtos </a></ul>
+            <ul><a href="contato.html"> Contato </a></ul>
+        </div>
+    </nav>
+
+    <section class="fundo-carrinho">
         <article class="descricao-titulo">
             <p>Produto</p>
-            <p>Preco</p>
+            <p>Preço</p>
             <p>Quantidade</p>
             <p>Sub Total</p>
-           </article>
-           
-        
-        <article class="carrinho-produtos">
-            
-            <img class="imagem-carrinho" src="imagens/racao-gato-adulta.jpeg" alt="" >
-            <p>R$10,00</p>
-            <p>5</p>
-            <p>R$50,00</p>
+            <p>Ação</p>
         </article>
         
-        <article>
-            <article class="fundo-botao">
-
-            <button class="botao2">Adicionar mais ao carrinho </button> 
-    
-        <article>
-               <button class="botao3"> - 1 +</button>
-            </article>
-
+        <div id="cartItems"></div> <!-- Placeholder for cart items -->
+        
+        <article class="fundo-botao">
+            <button class="botao2" onclick="addProductToCart()">Adicionar produto</button> 
         </article>
-       
-           
-        </article>
-    
-     </section>
+    </section>
 
-     <section class="fundo-resumo">
-
+    <section class="fundo-resumo">
         <article class="resumo">
             <h2>Resumo do Pedido</h2>
             <article class="descricao-resumo">
-                <p>valor dos produtos 50,00</p>
-                <p>total: R$50,00</p>
+                <p>Valor dos produtos: <span id="totalValue">R$0,00</span></p>
                 <hr>
                 <p class="entrega">Entrega</p>
-                <p>calcule o frete: <br> <input type="text" name="frete" placeholder="Digite seu CEP"> <button>Atualizar</button></p>
-                
+                <p>Calcule o frete: <br> <input type="text" name="frete" placeholder="Digite seu CEP"> <button>Atualizar</button></p>
             </article>
         </article>
         <article>
-            <button class="botao4">
-                Finalizar Pedido
-            </button>
+            <button class="botao4">Finalizar Pedido</button>
         </article>
+    </section>
 
+    <script>
+        // Function to display cart items
+        function displayCart() {
+            const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartContainer = document.getElementById('cartItems');
+            cartContainer.innerHTML = ''; // Clear previous items
+            
+            let totalValue = 0;
 
-     </section>
-     
-    
+            cartItems.forEach(item => {
+                const cartItem = document.createElement('article');
+                cartItem.classList.add('carrinho-produtos');
+                const subtotal = item.price * item.quantity;
+                totalValue += subtotal;
+
+                cartItem.innerHTML = `
+                    <p>${item.name}</p>
+                    <p>R$${item.price.toFixed(2)}</p>
+                    <p>${item.quantity}</p>
+                    <p>R$${subtotal.toFixed(2)}</p>
+                    <button onclick="removeFromCart('${item.name}')">Remover</button>
+                `;
+                cartContainer.appendChild(cartItem);
+            });
+
+            document.getElementById('totalValue').innerText = `R$${totalValue.toFixed(2)}`;
+        }
+
+        // Function to add or update product in cart
+        function addProductToCart() {
+            const product = {
+                name: "Ração Para Cachorro PEDIGREE", // Exemplo, deve ser dinâmico
+                price: 10.50, // Exemplo, deve ser dinâmico
+                quantity: 1
+            };
+            
+            const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+            const existingProductIndex = cartItems.findIndex(item => item.name === product.name);
+
+            if (existingProductIndex > -1) {
+                // Se o produto já existe, aumenta a quantidade
+                cartItems[existingProductIndex].quantity += 1;
+            } else {
+                // Se não existe, adiciona o novo produto
+                cartItems.push(product);
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cartItems));
+            displayCart();
+        }
+
+        // Function to remove product from cart
+        function removeFromCart(productName) {
+            const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+            const updatedCartItems = cartItems.filter(item => item.name !== productName);
+            localStorage.setItem('cart', JSON.stringify(updatedCartItems));
+            displayCart();
+        }
+
+        // Call the function to display cart items on load
+        displayCart();
+    </script>
 </body>
 </html>

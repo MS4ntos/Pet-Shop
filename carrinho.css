@@ -1,3 +1,76 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+.fundo-carrinho {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.descricao-titulo {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    border-bottom: 2px solid black;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.carrinho-produtos {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.carrinho-produtos p {
+    margin: 0;
+    flex: 1;
+}
+
+.fundo-botao {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.botao2, .botao3, .botao4 {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.botao2:hover, .botao3:hover, .botao4:hover {
+    background-color: orangered;
+}
+
+.fundo-resumo {
+    margin-top: 20px;
+    border-top: 2px solid black;
+    padding-top: 20px;
+}
+
+.descricao-resumo p {
+    margin: 5px 0;
+}
+
+.entrega {
+    font-weight: bold;
+}
+
+hr {
+    margin: 15px 0;
+}
 
 
 .perfil{
@@ -12,7 +85,7 @@
 .cabeçalho{
     display: flex;
      height: 10rcap;
-     color: white;
+     color: black;
 }
 
 .logo{
@@ -24,7 +97,7 @@
     height: 10%;
     box-sizing: border-box;
     border: 2px solid;
-    border-color: orangered;
+    border-color: rgb(250, 122, 3);
     border-radius: 25px;
     padding: 10px;
    
@@ -37,7 +110,10 @@
     height: 50px;
     font-size: 20px;
     margin-right: 50%;
-    background: orangered;
+}
+
+.fundo-nav{
+  background: orangered;
 }
 
 a{
@@ -47,7 +123,7 @@ a{
 a:hover{
   text-decoration: none;
   margin-right: 35px;
-  color: orangered;
+  color: orangered
 }
 
 
@@ -114,128 +190,4 @@ ul:hover{
 .carrinho{
     width: 100px;
    
-}
-
-
-
-
-
-
-
-
-
-
-.fundo-carrinho{
-    
-    background: rgb(255, 255, 255);
-    border-radius: 20px;
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
-    width: 30%;
-    height: 30rcap;
-    margin-left: 15px;
-    
-   }
-   
-
-   .descricao-titulo{
-    display: flex;
-    justify-content: space-evenly;
-   }
-   h2{
-    margin-left: 25%;
-   }
-
-   .carrinho-produtos{
-    display: flex;
-    justify-content: space-around;
-    
-   }
-
-   .imagem-carrinho{
-    width: 80px;
-    height: 80px;
-    
-   }
-
-   .botao2{
-   
-  margin-left: 30%;
-   }
-
-   .botao2:hover{
-    background-color: black;
-    color: white;
-   }
-
-   .botao3{
-    width: 100%;
-    margin-left: 10px;
-   }
-
-   .botao3:hover{
-    background-color: black;
-    color: white;
-   }
-
-   
-   
-.fundo-botao{
-    display: flex;
-   justify-content: center;
-   border-radius: 50px;
-   
-}
-
-
-
-
-
-
-
-hr{
-    margin-right: 100px;
-}
-.resumo{
-    margin-left: 20px;
-}
-.fundo-resumo{
-    background: rgb(255, 255, 255);
-    border-radius: 20px;
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
-    width: 30%;
-    height: 22rcap;
-    margin-left: 15px;
-}
- 
-.fundo-carrinho{
-    height: 15rcap;
-}
-
-.entrega{
-    font-size: 20px;
-    font-style: italic;
-}
-
-button{
-    border-radius: 20px;
-    color: black;
-    border-color: black;
-    
-}
-.botao4{
-    width: 100%;
-    height: 5rcap;
-    margin-top: 20px;
-    font-size: 20px;
-}
-
-.botao4:hover{
-    background: #08a730;
-    color: white;
-}
-
-.pagamento{
-    height: 40rcap;
-    width: 50%;
-  
 }

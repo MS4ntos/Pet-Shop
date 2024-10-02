@@ -143,7 +143,7 @@
 
 <section class="fundo-produtos">
     <h1>Produtos</h1>
-<div class="fundo-cards-produtos">
+<div id="productList" class="fundo-cards-produtos">
  
     <div class="plano-produtos">
     <div class="texto-desconto">
@@ -282,8 +282,9 @@
     </div>
 
     <div>
-        <input class="botao13" type="button" value="Comprar">
+        <input class="botao13" type="button" value="Comprar" onclick="addToCart('Ração Para Gato WHISKAS', 13.80, 1)">
     </div>
+    
     
  </div>
 
@@ -298,6 +299,26 @@
         <p>&copy; 2024 Seu Site. Todos os direitos reservados.</p>
     </footer>
 </div>
+
+<script>
+    function addToCart(productName, price, quantity) {
+        const product = {
+            name: productName,
+            price: price,
+            quantity: quantity,
+            subtotal: (price * quantity).toFixed(2) // Calculate subtotal
+        };
+        
+        // Store product in local storage
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cart.push(product);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        
+        // Redirect to cart page
+        window.location.href = 'carrinho.html';
+    }
+</script>
+
 
 
 
