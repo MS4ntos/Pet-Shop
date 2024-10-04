@@ -172,7 +172,7 @@
     </div>
 
     <div>
-        <input class="botao5" type="button" value="Comprar">
+        <input class="botao5" type="button" value="Comprar" onclick="addToCart('Ração Para Cachorro', 10.50, 1)">
     </div>
     
  </div>
@@ -208,7 +208,7 @@
     </div>
 
     <div>
-        <input class="botao7" type="button" value="Comprar">
+        <input class="botao7" type="button" value="Comprar" onclick="addToCart('Pote Grande', 15.50, 1)">
     </div>
     
  </div>
@@ -223,7 +223,7 @@
         <p>35% OFF</p>
     </div>
     <div>
-        <img  class="imagem-servico" src="imagens/banho.jpeg" alt="">
+        <img  class="imagem-servico" src="imagens/Racao-Para-Coelho.png" alt="">
     </div>
 
     <div>
@@ -231,7 +231,7 @@
     </div>
 
     <div class="descricao-produto3">
-        <p>Banho </p>
+        <p>Ração para Coelho </p>
     </div>
 
     <div class="preco3">
@@ -245,7 +245,7 @@
     </div>
 
     <div>
-        <input class="botao10" type="button" value="Comprar">
+        <input class="botao10" type="button" value="Comprar" onclick="addToCart('Ração Para Coelho', 45.00, 1)" >
     </div>
     
  </div>
@@ -302,21 +302,34 @@
 
 <script>
     function addToCart(productName, price, quantity) {
+    
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    
+    const existingProductIndex = cart.findIndex(item => item.name === productName);
+
+    if (existingProductIndex > -1) {
+        
+        cart[existingProductIndex].quantity += quantity;
+        cart[existingProductIndex].subtotal = (cart[existingProductIndex].price * cart[existingProductIndex].quantity).toFixed(2);
+    } else {
+        
         const product = {
             name: productName,
             price: price,
             quantity: quantity,
-            subtotal: (price * quantity).toFixed(2) // Calculate subtotal
+            subtotal: (price * quantity).toFixed(2) 
         };
-        
-        // Store product in local storage
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
         cart.push(product);
-        localStorage.setItem('cart', JSON.stringify(cart));
-        
-        // Redirect to cart page
-        window.location.href = 'carrinho.html';
     }
+
+    
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+    
+    window.location.href = 'carrinho.html';
+}
+
 </script>
 
 

@@ -1,4 +1,19 @@
-.perfil{
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+.cabeçalho {
+    display: flex;
+    height: 10rem; 
+    color: rgb(22, 22, 22);
+}
+
+.logo {
+    width: 30%;
+}
+
+.perfil {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -6,18 +21,7 @@
     margin-left: 20%;
 }
 
-
-.cabeçalho{
-    display: flex;
-     height: 10rcap;
-     color: white;
-}
-
-.logo{
-    width: 30%;
-}
-
-.botao{
+.botao {
     width: 20%;
     height: 10%;
     box-sizing: border-box;
@@ -25,94 +29,132 @@
     border-color: rgb(250, 122, 3);
     border-radius: 25px;
     padding: 10px;
-   
 }
 
-.navegacao{
+.navegacao {
     display: flex;
-    justify-content:center;
+    justify-content: center;
     width: 100%;
     height: 50px;
     font-size: 20px;
-    margin-right: 50%;
 }
 
-.fundo-nav{
-  background: orangered;
+.fundo-nav {
+    background: orangered;
 }
 
-a{
-  text-decoration: none;
-  color: #fafafa;
-}
-a:hover{
-  text-decoration: none;
-  margin-right: 35px;
-  color: orangered
+a {
+    text-decoration: none;
+    color: #fafafa;
 }
 
+a:hover {
+    text-decoration: none;
+    margin-right: 35px;
+    color: orangered;
+}
 
-ul:hover{
-  background: rgb(255, 255, 255);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+ul:hover {
+    background: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
     transition: 0.5s;
     border-radius: 20px;
     margin-left: 30px;
     width: 40px;
-    height: 2rcap;
-    
+    height: 2rem; 
 }
 
-
-
-
-.imagem-boneco{
+.imagem-boneco {
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: Arial, sans-serif;
-    
 }
 
-.boneco{
+.boneco {
     width: 100%;
-    height: 15rcap;
-    
-    
-   
+    height: 15rem;
 }
 
-.imagem-pet{
+.imagem-pet {
     display: flex;
     justify-content: center;
     align-items: stretch;
     width: 100%;
     height: 400px;
     margin-top: 30px;
-   
 }
 
-.pet{
+.pet {
     border-radius: 11px;
-
 }
 
-.imagem-watts{
+.imagem-watts {
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: Arial, sans-serif;
 }
 
-.watts{
+.watts {
     width: 110px;
-    
 }
 
-.carrinho{
+.carrinho {
     width: 100px;
+}
+
+.fundo-cadastro {
    
+    padding: 50px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.cadastro {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    width: 300px;
+}
+
+h1 {
+    text-align: center;
+}
+
+label {
+    margin-top: 10px;
+    display: block;
+}
+
+input {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+button {
+    background: orangered;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    background: #d44d00; 
+}
+
+#mensagem {
+    text-align: center;
+    margin-top: 10px;
+    color: red; 
 }

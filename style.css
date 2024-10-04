@@ -10,7 +10,7 @@
 .cabeçalho{
     display: flex;
      height: 10rcap;
-     color: white;
+     color: rgb(0, 0, 0);
 }
 
 .logo{
@@ -270,7 +270,7 @@ ul:hover{
 }
 .plano-categoria{
    
-    color: rgb(255, 248, 248);
+    color: rgb(0, 0, 0);
     margin-bottom: -2rcap;
 }
 .plano-especies{
@@ -284,7 +284,7 @@ ul:hover{
 .Categorias-Populares{
     display: flex;
     justify-content: center;
-    color: white;
+    color: rgb(0, 0, 0);
     
   
     

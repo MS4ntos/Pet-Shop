@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carrinho</title>
-    <link rel="stylesheet" href="carrinho.css">
+    <link rel="stylesheet" href="carrinho.css">  
+    
+        
+    
 </head>
 <body>
     <header class="cabeçalho">
@@ -44,11 +47,12 @@
             <p>Ação</p>
         </article>
         
-        <div id="cartItems"></div> <!-- Placeholder for cart items -->
+        <div id="cartItems"></div> 
         
         <article class="fundo-botao">
-            <button class="botao2" onclick="addProductToCart()">Adicionar produto</button> 
+            <button class="botao2" >Adicionar produto</button> 
         </article>
+        
     </section>
 
     <section class="fundo-resumo">
@@ -58,20 +62,28 @@
                 <p>Valor dos produtos: <span id="totalValue">R$0,00</span></p>
                 <hr>
                 <p class="entrega">Entrega</p>
-                <p>Calcule o frete: <br> <input type="text" name="frete" placeholder="Digite seu CEP"> <button>Atualizar</button></p>
+                <p>Calcule o frete: <br> 
+                    <input type="text" id="cep" name="frete" placeholder="Digite seu CEP" maxlength="8"> 
+                    <button onclick="calcularFrete()">Atualizar</button>
+                </p>
+                <p id="endereco"></p>
+                <p>Valor do frete: <span id="freteValue">R$0,00</span></p>
             </article>
         </article>
         <article>
-            <button class="botao4">Finalizar Pedido</button>
+            <button class="botao4" onclick="finalizarCompra()">Finalizar Pedido</button>
         </article>
     </section>
 
+    
+    <div id="pedidoAlert" class="alert">Pedido realizado com sucesso! Obrigado por comprar na Alpha Pet!</div>
+
     <script>
-        // Function to display cart items
+        
         function displayCart() {
             const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
             const cartContainer = document.getElementById('cartItems');
-            cartContainer.innerHTML = ''; // Clear previous items
+            cartContainer.innerHTML = ''; 
             
             let totalValue = 0;
 
@@ -94,30 +106,64 @@
             document.getElementById('totalValue').innerText = `R$${totalValue.toFixed(2)}`;
         }
 
-        // Function to add or update product in cart
-        function addProductToCart() {
-            const product = {
-                name: "Ração Para Cachorro PEDIGREE", // Exemplo, deve ser dinâmico
-                price: 10.50, // Exemplo, deve ser dinâmico
-                quantity: 1
-            };
-            
-            const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
-            const existingProductIndex = cartItems.findIndex(item => item.name === product.name);
+    
+        function calcularFrete() {
+            const cep = document.getElementById('cep').value;
 
-            if (existingProductIndex > -1) {
-                // Se o produto já existe, aumenta a quantidade
-                cartItems[existingProductIndex].quantity += 1;
+            if (cep.length === 8) { 
+                fetch(`https://viacep.com.br/ws/${cep}/json/`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.erro) {
+                            document.getElementById('endereco').innerText = "CEP inválido. Tente novamente.";
+                            document.getElementById('freteValue').innerText = "R$0,00";
+                        } else {
+                            const endereco = `${data.logradouro}, ${data.bairro}, ${data.localidade} - ${data.uf}`;
+                            const valorFrete = 15.00; 
+
+                            document.getElementById('endereco').innerText = endereco;
+                            document.getElementById('freteValue').innerText = `R$${valorFrete.toFixed(2)}`;
+                        }
+                    })
+                    .catch(error => {
+                        document.getElementById('endereco').innerText = "Erro ao buscar CEP. Tente novamente.";
+                    });
             } else {
-                // Se não existe, adiciona o novo produto
-                cartItems.push(product);
+                document.getElementById('endereco').innerText = "CEP inválido. Tente novamente.";
+                document.getElementById('freteValue').innerText = "R$0,00";
             }
-
-            localStorage.setItem('cart', JSON.stringify(cartItems));
-            displayCart();
         }
 
-        // Function to remove product from cart
+    
+/*************  ✨ Codeium Command 🌟  *************/
+        /**
+         * Mostra um alerta de sucesso na tela e remove o carrinho do local storage
+         * Após 3 segundos, redireciona o usuario para a pagina inicial
+         */
+        function finalizarCompra() {
+            const alertBox = document.getElementById('pedidoAlert');
+            alertBox.classList.add('show'); // Mostra o alerta de sucesso
+            alertBox.classList.add('show');
+            
+            
+            // Aguarda 3 segundos antes de executar o restante do codigo
+            setTimeout(() => {
+                alertBox.classList.remove('show'); // Remove o alerta de sucesso
+                localStorage.removeItem('cart'); // Remove o carrinho do local storage
+                window.location.href = 'index.html'; // Redireciona o usuario para a pagina inicial
+                alertBox.classList.remove('show');
+                localStorage.removeItem('cart'); 
+                window.location.href = 'index.html'; 
+            }, 3000);
+        }
+/******  cbdaf055-cdec-4ff9-92b1-e1ffa24e2f19  *******/
+        
+/*************  ✨ Codeium Command ⭐  *************/
+        /**
+         * Remove um item do carrinho pelo nome do produto.
+         * @param {string} productName - Nome do produto a ser removido.
+         */
+/******  ac1a0f54-2745-4916-b4ae-0fa5b57336bf  *******/
         function removeFromCart(productName) {
             const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
             const updatedCartItems = cartItems.filter(item => item.name !== productName);
@@ -125,7 +171,7 @@
             displayCart();
         }
 
-        // Call the function to display cart items on load
+        
         displayCart();
     </script>
 </body>
