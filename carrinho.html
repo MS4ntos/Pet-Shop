@@ -135,35 +135,31 @@
         }
 
     
-/*************  ✨ Codeium Command 🌟  *************/
-        /**
-         * Mostra um alerta de sucesso na tela e remove o carrinho do local storage
-         * Após 3 segundos, redireciona o usuario para a pagina inicial
-         */
+
         function finalizarCompra() {
             const alertBox = document.getElementById('pedidoAlert');
-            alertBox.classList.add('show'); // Mostra o alerta de sucesso
+            alertBox.classList.add('show'); 
             alertBox.classList.add('show');
             
             
-            // Aguarda 3 segundos antes de executar o restante do codigo
+            
             setTimeout(() => {
-                alertBox.classList.remove('show'); // Remove o alerta de sucesso
-                localStorage.removeItem('cart'); // Remove o carrinho do local storage
-                window.location.href = 'index.html'; // Redireciona o usuario para a pagina inicial
+                alertBox.classList.remove('show'); 
+                localStorage.removeItem('cart'); 
+                window.location.href = 'index.html'; 
                 alertBox.classList.remove('show');
                 localStorage.removeItem('cart'); 
                 window.location.href = 'index.html'; 
             }, 3000);
         }
-/******  cbdaf055-cdec-4ff9-92b1-e1ffa24e2f19  *******/
+
         
-/*************  ✨ Codeium Command ⭐  *************/
-        /**
-         * Remove um item do carrinho pelo nome do produto.
-         * @param {string} productName - Nome do produto a ser removido.
-         */
-/******  ac1a0f54-2745-4916-b4ae-0fa5b57336bf  *******/
+
+        
+         
+        
+         
+
         function removeFromCart(productName) {
             const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
             const updatedCartItems = cartItems.filter(item => item.name !== productName);
