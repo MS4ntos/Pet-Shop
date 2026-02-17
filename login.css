@@ -1,160 +1,360 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-}
+:root {
+            --verde: #2D6A4F;
+            --verde-claro: #52B788;
+            --verde-neon: #74C69D;
+            --creme: #F8F4EE;
+            --creme-escuro: #EDE8DF;
+            --laranja: #F4845F;
+            --marrom: #3D2B1F;
+            --branco: #FDFCFA;
+            --cinza: #8A8278;
+            --vermelho: #E63946;
+        }
 
-.cabeçalho {
-    display: flex;
-    height: 10rem; 
-    color: rgb(22, 22, 22);
-}
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-.logo {
-    width: 30%;
-}
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--creme);
+            color: var(--marrom);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
 
-.perfil {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
-    margin-left: 20%;
-}
+        /* ─── FUNDO DECORATIVO ─── */
+        .bg-blobs {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.18;
+        }
+        .blob-1 {
+            width: 500px; height: 500px;
+            background: var(--verde);
+            top: -120px; left: -120px;
+        }
+        .blob-2 {
+            width: 400px; height: 400px;
+            background: var(--verde-claro);
+            bottom: -100px; right: -80px;
+        }
+        .blob-3 {
+            width: 260px; height: 260px;
+            background: var(--laranja);
+            top: 50%; right: 20%;
+            opacity: 0.1;
+        }
 
-.botao {
-    width: 20%;
-    height: 10%;
-    box-sizing: border-box;
-    border: 2px solid;
-    border-color: rgb(250, 122, 3);
-    border-radius: 25px;
-    padding: 10px;
-}
+        /* ─── WRAPPER ─── */
+        .wrapper {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            width: 880px;
+            min-height: 560px;
+            background: var(--branco);
+            border-radius: 28px;
+            box-shadow: 0 24px 80px rgba(45,106,79,0.18);
+            overflow: hidden;
+        }
 
-.navegacao {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    height: 50px;
-    font-size: 20px;
-}
+        /* ─── PAINEL LATERAL (verde) ─── */
+        .painel-lateral {
+            width: 340px;
+            flex-shrink: 0;
+            background: linear-gradient(160deg, var(--verde) 0%, #1B4332 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 48px 36px;
+            text-align: center;
+            position: relative;
+            transition: all 0.5s ease;
+        }
 
-.fundo-nav {
-    background: orangered;
-}
+        .painel-lateral::before {
+            content: '';
+            position: absolute;
+            width: 300px; height: 300px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.1);
+            top: -60px; right: -60px;
+        }
+        .painel-lateral::after {
+            content: '';
+            position: absolute;
+            width: 200px; height: 200px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.07);
+            bottom: -40px; left: -40px;
+        }
 
-a {
-    text-decoration: none;
-    color: #fafafa;
-}
+        .logo-lateral {
+            width: 72px; height: 72px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 20px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 36px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+        .painel-lateral h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        .painel-lateral h2 em {
+            color: var(--verde-neon);
+            font-style: italic;
+        }
+        .painel-lateral p {
+            font-size: 14px;
+            color: rgba(255,255,255,0.65);
+            line-height: 1.7;
+            margin-bottom: 32px;
+        }
 
-a:hover {
-    text-decoration: none;
-    margin-right: 35px;
-    color: orangered;
-}
+        .btn-trocar {
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.25s, transform 0.2s;
+            backdrop-filter: blur(8px);
+        }
+        .btn-trocar:hover {
+            background: rgba(255,255,255,0.22);
+            transform: scale(1.04);
+        }
 
-ul:hover {
-    background: rgb(255, 255, 255);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    transition: 0.5s;
-    border-radius: 20px;
-    margin-left: 30px;
-    width: 40px;
-    height: 2rem; 
-}
+        .lateral-tag {
+            display: inline-block;
+            background: rgba(116,198,157,0.2);
+            border: 1px solid rgba(116,198,157,0.35);
+            color: var(--verde-neon);
+            padding: 5px 14px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+        }
 
-.imagem-boneco {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: Arial, sans-serif;
-}
+        /* ─── PAINEL FORMULÁRIO ─── */
+        .painel-form {
+            flex: 1;
+            padding: 48px 44px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
 
-.boneco {
-    width: 100%;
-    height: 15rem;
-}
+        /* ─── TELAS (login / cadastro) ─── */
+        .tela {
+            position: absolute;
+            inset: 48px 44px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            transition: transform 0.45s cubic-bezier(.77,0,.18,1), opacity 0.35s ease;
+        }
+        .tela.oculta-direita  { transform: translateX(60px);  opacity: 0; pointer-events: none; }
+        .tela.oculta-esquerda { transform: translateX(-60px); opacity: 0; pointer-events: none; }
+        .tela.visivel          { transform: translateX(0);     opacity: 1; pointer-events: all; }
 
-.imagem-pet {
-    display: flex;
-    justify-content: center;
-    align-items: stretch;
-    width: 100%;
-    height: 400px;
-    margin-top: 30px;
-}
+        /* ─── FORM HEADER ─── */
+        .form-header { margin-bottom: 28px; }
+        .form-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--marrom);
+            margin-bottom: 6px;
+        }
+        .form-header h1 span { color: var(--verde); }
+        .form-header p {
+            font-size: 14px;
+            color: var(--cinza);
+        }
 
-.pet {
-    border-radius: 11px;
-}
+        /* ─── CAMPOS ─── */
+        .campo {
+            margin-bottom: 16px;
+            position: relative;
+        }
+        .campo label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--cinza);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 7px;
+        }
+        .campo-inner {
+            position: relative;
+        }
+        .campo-inner .icone-campo {
+            position: absolute;
+            left: 14px; top: 50%;
+            transform: translateY(-50%);
+            font-size: 17px;
+            pointer-events: none;
+        }
+        .campo input {
+            width: 100%;
+            padding: 13px 42px 13px 42px;
+            border: 2px solid var(--creme-escuro);
+            border-radius: 14px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            background: var(--creme);
+            color: var(--marrom);
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .campo input:focus {
+            border-color: var(--verde-claro);
+            box-shadow: 0 0 0 4px rgba(82,183,136,0.12);
+            background: var(--branco);
+        }
+        .campo input::placeholder { color: #C4BEB7; }
+        .campo input.erro { border-color: var(--vermelho); }
 
-.imagem-watts {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: Arial, sans-serif;
-}
+        .olho-btn {
+            position: absolute;
+            right: 14px; top: 50%;
+            transform: translateY(-50%);
+            background: none; border: none;
+            cursor: pointer; font-size: 17px;
+            color: var(--cinza);
+            transition: color 0.2s;
+        }
+        .olho-btn:hover { color: var(--verde); }
 
-.watts {
-    width: 110px;
-}
+        /* campos lado a lado */
+        .campos-duplos {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
 
-.carrinho {
-    width: 100px;
-}
+        /* ─── ESQUECEU SENHA ─── */
+        .link-esqueceu {
+            text-align: right;
+            margin-top: -8px;
+            margin-bottom: 20px;
+        }
+        .link-esqueceu a {
+            font-size: 13px;
+            color: var(--verde);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .link-esqueceu a:hover { text-decoration: underline; }
 
-.fundo-cadastro {
-   
-    padding: 50px 0;
-    display: flex;
-    justify-content: center;
-}
+        /* ─── BOTÃO SUBMIT ─── */
+        .btn-submit {
+            width: 100%;
+            background: var(--verde);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 14px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 18px rgba(45,106,79,0.28);
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            margin-bottom: 20px;
+        }
+        .btn-submit:hover {
+            background: #1B4332;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(45,106,79,0.38);
+        }
 
-.cadastro {
-    background: white;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    width: 300px;
-}
+        /* ─── DIVISOR ─── */
+        .divisor {
+            display: flex; align-items: center; gap: 12px;
+            margin-bottom: 20px;
+        }
+        .divisor hr { flex: 1; border: none; border-top: 1px solid var(--creme-escuro); }
+        .divisor span { font-size: 12px; color: var(--cinza); font-weight: 500; }
 
-h1 {
-    text-align: center;
-}
+        /* ─── LOGIN SOCIAL ─── */
+        .btn-social {
+            width: 100%;
+            background: var(--branco);
+            color: var(--marrom);
+            border: 2px solid var(--creme-escuro);
+            padding: 13px;
+            border-radius: 14px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: border-color 0.2s, background 0.2s;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+        .btn-social:hover { border-color: var(--verde-claro); background: var(--creme); }
 
-label {
-    margin-top: 10px;
-    display: block;
-}
+        /* ─── MENSAGEM DE ERRO/SUCESSO ─── */
+        .msg {
+            font-size: 13px;
+            font-weight: 600;
+            padding: 11px 16px;
+            border-radius: 10px;
+            margin-bottom: 14px;
+            display: none;
+        }
+        .msg.erro   { background: #FFF0F0; color: var(--vermelho); display: block; }
+        .msg.sucesso { background: #EDFAF3; color: var(--verde); display: block; }
 
-input {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    width: 100%;
-    margin-bottom: 15px;
-}
+        /* ─── VOLTAR ─── */
+        .link-voltar {
+            position: absolute;
+            top: 20px; left: 24px;
+            text-decoration: none;
+            color: var(--cinza);
+            font-size: 13px;
+            font-weight: 500;
+            display: flex; align-items: center; gap: 6px;
+            transition: color 0.2s;
+        }
+        .link-voltar:hover { color: var(--verde); }
 
-button {
-    background: orangered;
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 100%;
-}
-
-button:hover {
-    background: #d44d00; 
-}
-
-#mensagem {
-    text-align: center;
-    margin-top: 10px;
-    color: red; 
-}
+        /* ─── RESPONSIVO ─── */
+        @media (max-width: 700px) {
+            body { align-items: flex-start; padding: 20px 16px; }
+            .wrapper { flex-direction: column; width: 100%; min-height: auto; border-radius: 20px; }
+            .painel-lateral { width: 100%; padding: 36px 28px; }
+            .painel-lateral::before, .painel-lateral::after { display: none; }
+            .painel-form { padding: 36px 28px; }
+            .tela { position: static; transform: none !important; opacity: 1 !important; }
+            .tela.oculta-direita, .tela.oculta-esquerda { display: none; }
+            .campos-duplos { grid-template-columns: 1fr; }
+        }

@@ -3,112 +3,722 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario</title>
-    <link rel="stylesheet" href="sobre.css">
+    <title>Sobre — Popular Pet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --verde: #2D6A4F;
+            --verde-claro: #52B788;
+            --verde-neon: #74C69D;
+            --creme: #F8F4EE;
+            --creme-escuro: #EDE8DF;
+            --laranja: #F4845F;
+            --marrom: #3D2B1F;
+            --branco: #FDFCFA;
+            --cinza: #8A8278;
+            --sombra: 0 4px 30px rgba(45,106,79,0.10);
+            --sombra-forte: 0 8px 40px rgba(45,106,79,0.18);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--creme);
+            color: var(--marrom);
+            overflow-x: hidden;
+        }
+
+        /* ─── BARRA TOPO ─── */
+        .barra-topo {
+            background: var(--verde);
+            color: white;
+            text-align: center;
+            padding: 8px 16px;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+        }
+        .barra-topo span { color: var(--verde-neon); font-weight: 700; }
+
+        /* ─── HEADER ─── */
+        header {
+            background: var(--branco);
+            padding: 18px 60px;
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        .logo-icon {
+            width: 48px; height: 48px;
+            background: var(--verde);
+            border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 26px;
+        }
+        .logo-texto strong {
+            display: block;
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            color: var(--verde);
+            font-weight: 900;
+        }
+        .logo-texto span {
+            font-size: 11px;
+            color: var(--cinza);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+        .header-acoes {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            margin-left: auto;
+        }
+        .acao-item {
+            display: flex; align-items: center; gap: 10px;
+            cursor: pointer; text-decoration: none; color: var(--marrom);
+            transition: color 0.2s;
+        }
+        .acao-item:hover { color: var(--verde); }
+        .acao-item .icone {
+            width: 40px; height: 40px;
+            background: var(--creme);
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px;
+            transition: background 0.2s;
+        }
+        .acao-item:hover .icone { background: var(--creme-escuro); }
+        .acao-texto small { display: block; font-size: 10px; color: var(--cinza); text-transform: uppercase; letter-spacing: 0.8px; }
+        .acao-texto strong { font-size: 13px; }
+        .carrinho-btn {
+            position: relative;
+            background: var(--verde); color: white;
+            border: none; width: 46px; height: 46px;
+            border-radius: 14px; font-size: 22px;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: background 0.2s, transform 0.2s;
+            text-decoration: none;
+        }
+        .carrinho-btn:hover { background: var(--verde-claro); transform: scale(1.05); }
+        .carrinho-badge {
+            position: absolute; top: -6px; right: -6px;
+            background: var(--laranja); color: white;
+            width: 20px; height: 20px;
+            border-radius: 50%; font-size: 11px; font-weight: 700;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        /* ─── NAV ─── */
+        nav {
+            background: var(--verde);
+            padding: 0 60px;
+            display: flex; align-items: center; gap: 4px;
+        }
+        nav a {
+            color: rgba(255,255,255,0.75);
+            text-decoration: none; font-size: 14px; font-weight: 500;
+            padding: 14px 18px;
+            transition: color 0.2s;
+            position: relative;
+        }
+        nav a:hover, nav a.ativo { color: white; }
+        nav a.ativo::after, nav a:hover::after {
+            content: '';
+            position: absolute; bottom: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 30px; height: 3px;
+            background: var(--verde-neon);
+            border-radius: 2px;
+        }
+        nav a:hover::after { background: rgba(116,198,157,0.5); }
+        nav a.ativo::after { background: var(--verde-neon); }
+
+        /* ─── HERO SOBRE ─── */
+        .hero-sobre {
+            background: linear-gradient(135deg, var(--verde) 0%, #1B4332 100%);
+            padding: 80px 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-sobre::before {
+            content: '🐾';
+            position: absolute; right: 60px; top: 50%;
+            transform: translateY(-50%);
+            font-size: 200px; opacity: 0.06;
+        }
+        .hero-sobre-conteudo { position: relative; z-index: 2; }
+        .hero-tag {
+            display: inline-block;
+            background: rgba(116,198,157,0.2);
+            color: var(--verde-neon);
+            font-size: 12px; font-weight: 600;
+            letter-spacing: 2px; text-transform: uppercase;
+            padding: 6px 16px; border-radius: 50px;
+            border: 1px solid rgba(116,198,157,0.3);
+            margin-bottom: 20px;
+        }
+        .hero-sobre h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 56px; font-weight: 900; color: white;
+            line-height: 1.08; margin-bottom: 16px;
+        }
+        .hero-sobre h1 em { font-style: normal; color: var(--verde-neon); }
+        .hero-sobre p {
+            color: rgba(255,255,255,0.7);
+            font-size: 17px; line-height: 1.7; max-width: 500px;
+        }
+        .hero-redes {
+            display: flex; gap: 14px; margin-top: 32px;
+        }
+        .rede-btn {
+            width: 48px; height: 48px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 22px; cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            text-decoration: none;
+        }
+        .rede-btn:hover { background: rgba(255,255,255,0.2); transform: translateY(-3px); }
+
+        /* ─── ÂNCORAS ─── */
+        .ancoras {
+            background: var(--branco);
+            padding: 20px 60px;
+            display: flex; gap: 8px;
+            border-bottom: 2px solid var(--creme-escuro);
+            overflow-x: auto;
+        }
+        .ancora {
+            padding: 10px 22px;
+            border-radius: 50px;
+            font-size: 13px; font-weight: 600;
+            text-decoration: none; color: var(--cinza);
+            border: 2px solid transparent;
+            transition: all 0.2s; white-space: nowrap;
+        }
+        .ancora:hover, .ancora.ativo {
+            color: var(--verde);
+            border-color: var(--verde-claro);
+            background: rgba(82,183,136,0.08);
+        }
+
+        /* ─── SECOES ─── */
+        .container-sobre { max-width: 1100px; margin: 0 auto; padding: 0 60px; }
+
+        .secao-sobre {
+            padding: 80px 60px;
+        }
+        .secao-sobre:nth-child(even) { background: var(--creme-escuro); }
+
+        .secao-label {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(45,106,79,0.08);
+            color: var(--verde);
+            font-size: 11px; font-weight: 700;
+            letter-spacing: 2px; text-transform: uppercase;
+            padding: 6px 16px; border-radius: 50px;
+            margin-bottom: 16px;
+        }
+        .secao-sobre h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 40px; font-weight: 900;
+            color: var(--marrom); margin-bottom: 20px;
+        }
+        .secao-sobre h2 span { color: var(--verde); }
+        .secao-sobre p {
+            font-size: 16px; line-height: 1.8;
+            color: #5A4A40; max-width: 680px;
+        }
+
+        /* ─── QUEM SOMOS ─── */
+        .quem-somos-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            max-width: 1100px; margin: 0 auto;
+        }
+        .quem-somos-visual {
+            background: linear-gradient(135deg, var(--verde) 0%, #1B4332 100%);
+            border-radius: 32px;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .quem-somos-visual::before {
+            content: '';
+            position: absolute; top: -40px; right: -40px;
+            width: 180px; height: 180px;
+            background: rgba(116,198,157,0.15);
+            border-radius: 50%;
+        }
+        .quem-somos-visual .emoji-grande { font-size: 100px; display: block; margin-bottom: 24px; }
+        .quem-somos-visual h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px; color: white; font-weight: 900;
+            margin-bottom: 10px;
+        }
+        .quem-somos-visual p { color: rgba(255,255,255,0.7); font-size: 15px; }
+
+        .quem-somos-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px; margin-top: 24px;
+        }
+        .mini-stat {
+            background: rgba(255,255,255,0.1);
+            border-radius: 16px; padding: 16px;
+            text-align: center;
+        }
+        .mini-stat strong {
+            display: block;
+            font-family: 'Playfair Display', serif;
+            font-size: 26px; color: var(--verde-neon); font-weight: 900;
+        }
+        .mini-stat span { font-size: 11px; color: rgba(255,255,255,0.6); }
+
+        /* ─── O QUE FAZEMOS ─── */
+        .fazemos-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px; margin-top: 40px;
+        }
+        .fazemos-card {
+            background: var(--branco);
+            border-radius: 22px; padding: 32px 28px;
+            border: 2px solid transparent;
+            transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+        }
+        .fazemos-card:hover {
+            border-color: var(--verde-claro);
+            transform: translateY(-5px);
+            box-shadow: var(--sombra-forte);
+        }
+        .fazemos-icone { font-size: 40px; margin-bottom: 16px; display: block; }
+        .fazemos-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px; font-weight: 700;
+            margin-bottom: 10px; color: var(--marrom);
+        }
+        .fazemos-card p { font-size: 14px; color: var(--cinza); line-height: 1.7; }
+
+        /* ─── CONTATO ─── */
+        .contato-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px; margin-top: 40px;
+        }
+        .contato-card {
+            background: var(--branco);
+            border-radius: 22px; padding: 32px 28px;
+            display: flex; align-items: flex-start; gap: 18px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .contato-card:hover { transform: translateY(-4px); box-shadow: var(--sombra-forte); }
+        .contato-icone {
+            width: 52px; height: 52px; min-width: 52px;
+            background: linear-gradient(135deg, var(--verde), var(--verde-claro));
+            border-radius: 16px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 24px;
+        }
+        .contato-info strong { display: block; font-size: 13px; color: var(--cinza); font-weight: 500; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.8px; }
+        .contato-info span { font-size: 15px; font-weight: 600; color: var(--marrom); }
+
+        /* ─── FEEDBACKS ─── */
+        .feedback-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px; margin-top: 40px;
+        }
+        .feedback-card {
+            background: var(--branco);
+            border-radius: 22px; padding: 32px 28px;
+            position: relative;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .feedback-card:hover { transform: translateY(-5px); box-shadow: var(--sombra-forte); }
+        .aspas {
+            font-size: 80px;
+            color: var(--verde-claro);
+            opacity: 0.2;
+            font-family: 'Playfair Display', serif;
+            line-height: 0.6;
+            position: absolute;
+            top: 20px; left: 24px;
+        }
+        .feedback-texto {
+            font-size: 15px; line-height: 1.75;
+            color: #5A4A40;
+            margin-bottom: 24px;
+            position: relative; z-index: 1;
+            padding-top: 16px;
+        }
+        .feedback-autor {
+            display: flex; align-items: center; gap: 16px;
+            border-top: 1px solid var(--creme-escuro);
+            padding-top: 20px;
+        }
+        .avatar {
+            width: 52px; height: 52px;
+            background: linear-gradient(135deg, var(--verde-claro), var(--verde));
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 26px; font-weight: 900; color: white;
+            font-family: 'Playfair Display', serif;
+        }
+        .autor-info strong { display: block; font-size: 15px; font-weight: 700; color: var(--marrom); }
+        .estrelas { color: #F4C430; font-size: 14px; margin-top: 2px; }
+
+        /* ─── VETERINÁRIOS ─── */
+        .vet-banner {
+            background: linear-gradient(135deg, var(--laranja), #E05A3A);
+            border-radius: 28px;
+            padding: 50px 60px;
+            display: flex; align-items: center;
+            justify-content: space-between;
+            gap: 40px; max-width: 1100px; margin: 40px auto 0;
+            position: relative; overflow: hidden;
+        }
+        .vet-banner::before {
+            content: '🩺';
+            position: absolute; right: 50px;
+            font-size: 130px; opacity: 0.15;
+        }
+        .vet-conteudo h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px; color: white; font-weight: 900;
+            margin-bottom: 10px;
+        }
+        .vet-conteudo p { color: rgba(255,255,255,0.85); font-size: 16px; max-width: 480px; line-height: 1.7; }
+        .btn-vet {
+            background: white; color: var(--laranja);
+            border: none; padding: 16px 36px;
+            border-radius: 50px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 15px; font-weight: 700;
+            cursor: pointer; white-space: nowrap;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn-vet:hover { transform: scale(1.05); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+
+        /* ─── FOOTER ─── */
+        footer {
+            background: var(--marrom);
+            color: rgba(255,255,255,0.6);
+            text-align: center;
+            padding: 30px 60px;
+            font-size: 13px;
+            margin-top: 80px;
+        }
+        footer strong { color: white; }
+
+        /* ─── ANIMAÇÕES ─── */
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hero-sobre-conteudo { animation: slideUp 0.7s ease forwards; }
+
+        /* ─── RESPONSIVO ─── */
+        @media (max-width: 900px) {
+            header, nav, .secao-sobre, .ancoras { padding-left: 24px; padding-right: 24px; }
+            .hero-sobre { padding: 50px 24px; }
+            .hero-sobre h1 { font-size: 38px; }
+            .quem-somos-grid { grid-template-columns: 1fr; }
+            .fazemos-grid, .contato-grid { grid-template-columns: 1fr 1fr; }
+            .feedback-grid { grid-template-columns: 1fr; }
+            .vet-banner { flex-direction: column; padding: 40px 30px; }
+        }
+    
+        /* ─── USUÁRIO LOGADO ─── */
+        .usuario-logado { display: flex; align-items: center; gap: 10px; }
+        .usuario-avatar { width: 40px; height: 40px; background: var(--creme); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; border: 2px solid var(--creme-escuro); }
+        .usuario-info small { display: block; font-size: 10px; color: var(--cinza); text-transform: uppercase; letter-spacing: 0.8px; }
+        .usuario-info strong { display: block; font-size: 13px; color: var(--marrom); max-width: 110px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .btn-sair { background: none; border: 2px solid var(--creme-escuro); color: var(--cinza); font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; padding: 6px 14px; border-radius: 50px; cursor: pointer; transition: border-color .2s, color .2s, background .2s; white-space: nowrap; }
+        .btn-sair:hover { border-color: #E63946; color: #E63946; background: #fff5f5; }
+
+    </style>
 </head>
 <body>
-  <div class="fundo-pet">
-    <header class="cabeçalho">
-     <div>
-        <img  class="logo2" src="imagens/alpha pet.png" alt="">
-     </div>
 
+<!-- BARRA TOPO -->
+<div class="barra-topo">
+    🎉 Frete Grátis em compras acima de R$99 • <span>5% off no PIX</span>
+</div>
 
-    </header>
-    <nav class="fundo-nav">
-        <div class="navegacao">
-        <ul>
-             <a href="index.html"   rel=""> Home </a> 
-        </ul>
-        <ul>
-            <a href="sobre.html"   rel=""> Sobre </a>
-        </ul>
-        <ul>
-            <a href="Servicos.html"   rel=""> Serviços </a>
-        </ul>
-        <ul>
-            <a href="produtos.html"   rel=""> Produtos </a>
-        </ul>
-        <ul>
-            <a href="contato.html"   rel=""> Contato </a>
-        
-        </ul>
-       <div>
-       
-       
-     </nav>
-
-<HR></HR>
-
-     <article class="fundo-sobre">
-
-     <div class="sobre">
-            <h1 class="texto-quem-somos">Quem Somos</h1>
-            <h1 class="texto-fazemos">O Que Fazemos</h1>
-            <h1 class="texto-contato"> Contato</h1>
-            <h1 class="texto-feedback"> Feedback</h1>
-            <h1 class="texto-veterinario">Veterinários</h1>
-       
-        <div class="redes">
-            <img class="insta" src="imagens/icon-instagram.png" alt="">
-            <img  class="face" src="imagens/icon-face.png" alt="">
-            <img  class="watts" src="imagens/icon-watts.png" alt="">
-               </div>
-               
-            </div>
-            
-<hr>
-         <div class="quem-somos">
-            <img class="logo" src="imagens/alpha pet.png" alt="">
-        
-          <div class="descricao-quem-somos">
-            
-            <h1>Quem Somos:</h1>
-            <p>ALPHA PET e uma empresa que atua na area de petshop, oferece os melhores produtos e atende as necessidades do cliente. <br> 
-                Temos a maior coleção de produtos para pets, e sempre com as melhores ofertas,  e o melhor atendimento,
-                para atender o melhor para o seu pet, sempre.
-            </p>
-
-            <h1>O Que Fazemos:</h1>
-            <p>Oferecemos os melhores produtos para pets, e sempre com as melhores ofertas,  e o melhor atendimento,
-                para atender o melhor para o seu pet, sempre.
-            </p>
-
-            <h1>Contato:</h1>
-            <p>Telefone: (75) 9 8184-4058 <br>
-                Email: ALPHAPET10@GMAIL.com <br>
-                Endereço: Rua das flores, 123 - Feira de Santana - BA
-            </p>
-
-            <h1>Feedback:</h1>
-            <div class="fundo-feedback">
-            <img class="neymar" src="imagens/neymar.jpeg" alt="">
-            <div>
-              <h2>Neymar</h2>
-              <p>Excelente atendimento, super recomendo, super atenciosos, são super educados, boa atuação </p>
-            </div>
+<!-- HEADER -->
+<header>
+    <a class="logo-area" href="index.html">
+        <div class="logo-icon">🐾</div>
+        <div class="logo-texto">
+            <strong>Popular Pet</strong>
+            <span>Pet Shop</span>
         </div>
-
-        <div class="fundo-feedback">
-            <img class="cristiano" src="imagens/cristiano-ronaldo.jpeg" alt="">
-            <div>
-              <h2>cristiano Ronaldo</h2>
-              <p>"Fiquei extremamente satisfeito com minha experiência na [Nome da Loja]! Desde o atendimento até a entrega dos produtos, tudo foi perfeito. Os vendedores são muito atenciosos, e me ajudaram a escolher o que realmente precisava, sem tentar me empurrar produtos desnecessários. A variedade de produtos também é excelente, com opções para todos os gostos e preços. A entrega foi rápida, e os itens chegaram em perfeito estado. Com certeza voltarei a comprar aqui e recomendarei para amigos e familiares. Parabéns à equipe da loja!" </p>
+    </a>
+    <div class="header-acoes">
+        <a class="acao-item" href="#">
+            <div class="icone">📞</div>
+            <div class="acao-texto">
+                <small>Suporte</small>
+                <strong>Atendimento</strong>
             </div>
-        </div>
-
-        <h1>Veterinários:</h1>
-        <img src="imagens/veterinario.jpeg" alt="">
-        <p> Nossa equipe de veterinários sempre disponíveis para ajuda-lo com os seus problemas, e sempre prontos para atender o seu pet.</p>
-
-
-         </div>
-           
-        </div>
-    
-
-
-     </article>
+        </a>
+        <div id="areaUsuario"></div>
+        <a class="carrinho-btn" href="carrinho.html">
+            🛒
+            <span class="carrinho-badge">0</span>
+        </a>
     </div>
-</body>
-</html>
+</header>
+
+<!-- NAV -->
+<nav>
+    <a href="index.html">🏠 Home</a>
+    <a href="sobre.html" class="ativo">Sobre</a>
+    <a href="Servicos.html">✂️ Serviços</a>
+    <a href="produtos.html">🛍️ Produtos</a>
+    <a href="contato.html">📬 Contato</a>
+</nav>
+
+<!-- HERO SOBRE -->
+<section class="hero-sobre">
+    <div class="hero-sobre-conteudo">
+        <div class="hero-tag">🐾 Nossa história</div>
+        <h1>Conheça a <em>Popular Pet</em></h1>
+        <p>Uma empresa que nasceu do amor pelos animais e cresce com o carinho dos nossos clientes. Qualidade, cuidado e os melhores produtos para o seu pet.</p>
+        <div class="hero-redes">
+            <a class="rede-btn" href="#" title="Instagram">📸</a>
+            <a class="rede-btn" href="#" title="Facebook">👍</a>
+            <a class="rede-btn" href="#" title="WhatsApp">💬</a>
+        </div>
+    </div>
+</section>
+
+<!-- ÂNCORAS DE NAVEGAÇÃO -->
+<div class="ancoras">
+    <a class="ancora ativo" href="#quem-somos">🏠 Quem Somos</a>
+    <a class="ancora" href="#o-que-fazemos">⚡ O Que Fazemos</a>
+    <a class="ancora" href="#contato">📞 Contato</a>
+    <a class="ancora" href="#feedbacks">💬 Feedbacks</a>
+    <a class="ancora" href="#veterinarios">🩺 Veterinários</a>
+</div>
+
+<!-- ─── QUEM SOMOS ─── -->
+<section class="secao-sobre" id="quem-somos">
+    <div style="max-width:1100px; margin:0 auto;">
+        <div class="quem-somos-grid">
+            <div>
+                <span class="secao-label">🐾 Nossa empresa</span>
+                <h2>Quem <span>Somos</span></h2>
+                <p>A Popular Pet é uma empresa especializada em pet shop, que oferece os melhores produtos e atende todas as necessidades do seu animal de estimação com amor e dedicação.</p>
+                <br>
+                <p>Temos a maior coleção de produtos para pets, sempre com as melhores ofertas e o melhor atendimento. Nosso compromisso é cuidar do que há de mais especial para você.</p>
+                <br>
+                <div style="display:flex; gap:16px; flex-wrap:wrap; margin-top:8px;">
+                    <div style="background:var(--branco); border-radius:16px; padding:18px 24px; border-left: 4px solid var(--verde);">
+                        <strong style="font-family:'Playfair Display',serif; font-size:22px; color:var(--verde);">2.400+</strong>
+                        <p style="font-size:12px; color:var(--cinza); margin-top:2px;">Produtos disponíveis</p>
+                    </div>
+                    <div style="background:var(--branco); border-radius:16px; padding:18px 24px; border-left: 4px solid var(--laranja);">
+                        <strong style="font-family:'Playfair Display',serif; font-size:22px; color:var(--laranja);">98%</strong>
+                        <p style="font-size:12px; color:var(--cinza); margin-top:2px;">Satisfação dos clientes</p>
+                    </div>
+                    <div style="background:var(--branco); border-radius:16px; padding:18px 24px; border-left: 4px solid var(--verde-claro);">
+                        <strong style="font-family:'Playfair Display',serif; font-size:22px; color:var(--verde-claro);">5 anos</strong>
+                        <p style="font-size:12px; color:var(--cinza); margin-top:2px;">No mercado</p>
+                    </div>
+                </div>
+            </div>
+            <div class="quem-somos-visual">
+                <span class="emoji-grande">🐕</span>
+                <h3>Popular Pet</h3>
+                <p>Amor em cada produto, cuidado em cada atendimento.</p>
+                <div class="quem-somos-stats">
+                    <div class="mini-stat">
+                        <strong>7 dias</strong>
+                        <span>Entrega Express</span>
+                    </div>
+                    <div class="mini-stat">
+                        <strong>5%</strong>
+                        <span>Off no PIX</span>
+                    </div>
+                    <div class="mini-stat">
+                        <strong>6x</strong>
+                        <span>Sem juros</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── O QUE FAZEMOS ─── -->
+<section class="secao-sobre" id="o-que-fazemos">
+    <div style="max-width:1100px; margin:0 auto;">
+        <span class="secao-label">⚡ Nossos serviços</span>
+        <h2>O Que <span>Fazemos</span></h2>
+        <p>Oferecemos uma experiência completa para você e seu pet, com produtos de qualidade, serviços especializados e atendimento de excelência.</p>
+        <div class="fazemos-grid">
+            <div class="fazemos-card">
+                <span class="fazemos-icone">🛍️</span>
+                <h3>Produtos Premium</h3>
+                <p>Os melhores produtos para rações, acessórios e muito mais, selecionados com cuidado para garantir a saúde e felicidade do seu pet.</p>
+            </div>
+            <div class="fazemos-card">
+                <span class="fazemos-icone">✂️</span>
+                <h3>Banho & Tosa</h3>
+                <p>Serviços de banho e tosa profissional com toda atenção que o seu bichinho merece, realizado por profissionais experientes.</p>
+            </div>
+            <div class="fazemos-card">
+                <span class="fazemos-icone">🩺</span>
+                <h3>Consultoria Veterinária</h3>
+                <p>Nossa equipe de veterinários está sempre disponível para ajudar com dúvidas e cuidados preventivos para o seu animal.</p>
+            </div>
+            <div class="fazemos-card">
+                <span class="fazemos-icone">🚚</span>
+                <h3>Entrega Expressa</h3>
+                <p>Entregamos seus pedidos com rapidez e segurança, com opções de entrega expressa e frete grátis nas suas compras.</p>
+            </div>
+    </div>
+</section>
+
+<!-- ─── CONTATO ─── -->
+<section class="secao-sobre" id="contato">
+    <div style="max-width:1100px; margin:0 auto;">
+        <span class="secao-label">📞 Fale conosco</span>
+        <h2>Nosso <span>Contato</span></h2>
+        <p>Estamos sempre prontos para atender você. Entre em contato pelos nossos canais de comunicação.</p>
+        <div class="contato-grid">
+            <div class="contato-card">
+                <div class="contato-icone">📱</div>
+                <div class="contato-info">
+                    <strong>Telefone / WhatsApp</strong>
+                    <span>(75) 9 8184-4058</span>
+                </div>
+            </div>
+            <div class="contato-card">
+                <div class="contato-icone">✉️</div>
+                <div class="contato-info">
+                    <strong>E-mail</strong>
+                    <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3e5f524e565f4e5b4a0f0e7e59535f5752105d5153">[email&#160;protected]</a></span>
+                </div>
+            </div>
+            <div class="contato-card">
+                <div class="contato-icone">📍</div>
+                <div class="contato-info">
+                    <strong>Endereço</strong>
+                    <span>Rua das Flores, 123 — Feira de Santana, BA</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── FEEDBACKS ─── -->
+<section class="secao-sobre" id="feedbacks">
+    <div style="max-width:1100px; margin:0 auto;">
+        <span class="secao-label">💬 Depoimentos</span>
+        <h2>O que nossos <span>Clientes</span> dizem</h2>
+        <p>A opinião dos nossos clientes é o nosso maior orgulho. Veja o que eles têm a dizer sobre a Popular Pet.</p>
+        <div class="feedback-grid">
+            <div class="feedback-card">
+                <div class="aspas">"</div>
+                <p class="feedback-texto">Excelente atendimento, super recomendo! Equipe super atenciosa e educada, boa atuação em todos os sentidos. Com certeza voltarei sempre!</p>
+                <div class="feedback-autor">
+                    <div class="avatar">N</div>
+                    <div class="autor-info">
+                        <strong>Neymar</strong>
+                        <div class="estrelas">★★★★★</div>
+                    </div>
+                </div>
+            </div>
+            <div class="feedback-card">
+                <div class="aspas">"</div>
+                <p class="feedback-texto">Fiquei extremamente satisfeito com minha experiência! Desde o atendimento até a entrega, tudo foi perfeito. A variedade de produtos é excelente, com opções para todos os gostos e preços. A entrega foi rápida e os itens chegaram em perfeito estado. Recomendo muito!</p>
+                <div class="feedback-autor">
+                    <div class="avatar">C</div>
+                    <div class="autor-info">
+                        <strong>Cristiano Ronaldo</strong>
+                        <div class="estrelas">★★★★★</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ─── VETERINÁRIOS ─── -->
+<section class="secao-sobre" id="veterinarios">
+    <div style="max-width:1100px; margin:0 auto;">
+        <span class="secao-label">🩺 Saúde animal</span>
+        <h2>Nossa Equipe de <span>Veterinários</span></h2>
+        <p>Profissionais especializados e apaixonados por animais, sempre disponíveis para ajudá-lo com os cuidados e necessidades do seu pet.</p>
+        <div class="vet-banner">
+            <div class="vet-conteudo">
+                <h2>Cuide da saúde do seu pet! 🐾</h2>
+                <p>Nossa equipe de veterinários está sempre disponível para consultas, orientações e cuidados preventivos. Agende agora mesmo!</p>
+            </div>
+            <button class="btn-vet" onclick="window.location.href='contato.html'">
+                📅 Agendar Consulta
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p><script>
+
+    /* ─── Sessão do usuário ─── */
+    function renderUsuario() {
+        const area = document.getElementById('areaUsuario');
+        if (!area) return;
+        const raw = localStorage.getItem('ppUser');
+        if (raw) {
+            const user = JSON.parse(raw);
+            area.innerHTML = `
+                <div class="usuario-logado">
+                    <div class="usuario-avatar">${user.avatar}</div>
+                    <div class="usuario-info">
+                        <small>Olá,</small>
+                        <strong>${user.nome}</strong>
+                    </div>
+                    <button class="btn-sair" onclick="sairConta()">Sair</button>
+                </div>`;
+        } else {
+            area.innerHTML = `
+                <a class="acao-item" href="login.html">
+                    <div class="icone">👤</div>
+                    <div class="acao-texto">
+                        <small>Entre ou</small>
+                        <strong>Cadastre-se</strong>
+                    </div>
+                </a>`;
+        }
+    }
+    function sairConta() { localStorage.removeItem('ppUser'); window.location.href = 'login.html'; }
+    renderUsuario();
+
+</script>

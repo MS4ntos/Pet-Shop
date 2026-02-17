@@ -3,81 +3,642 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="login.css">
-    <title>Login</title>
+    <title>Login — Popular Pet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --verde: #2D6A4F;
+            --verde-claro: #52B788;
+            --verde-neon: #74C69D;
+            --creme: #F8F4EE;
+            --creme-escuro: #EDE8DF;
+            --laranja: #F4845F;
+            --marrom: #3D2B1F;
+            --branco: #FDFCFA;
+            --cinza: #8A8278;
+            --vermelho: #E63946;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--creme);
+            color: var(--marrom);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* ─── FUNDO DECORATIVO ─── */
+        .bg-blobs {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.18;
+        }
+        .blob-1 {
+            width: 500px; height: 500px;
+            background: var(--verde);
+            top: -120px; left: -120px;
+        }
+        .blob-2 {
+            width: 400px; height: 400px;
+            background: var(--verde-claro);
+            bottom: -100px; right: -80px;
+        }
+        .blob-3 {
+            width: 260px; height: 260px;
+            background: var(--laranja);
+            top: 50%; right: 20%;
+            opacity: 0.1;
+        }
+
+        /* ─── WRAPPER ─── */
+        .wrapper {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            width: 880px;
+            min-height: 560px;
+            background: var(--branco);
+            border-radius: 28px;
+            box-shadow: 0 24px 80px rgba(45,106,79,0.18);
+            overflow: hidden;
+        }
+
+        /* ─── PAINEL LATERAL (verde) ─── */
+        .painel-lateral {
+            width: 340px;
+            flex-shrink: 0;
+            background: linear-gradient(160deg, var(--verde) 0%, #1B4332 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 48px 36px;
+            text-align: center;
+            position: relative;
+            transition: all 0.5s ease;
+        }
+
+        .painel-lateral::before {
+            content: '';
+            position: absolute;
+            width: 300px; height: 300px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.1);
+            top: -60px; right: -60px;
+        }
+        .painel-lateral::after {
+            content: '';
+            position: absolute;
+            width: 200px; height: 200px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.07);
+            bottom: -40px; left: -40px;
+        }
+
+        .logo-lateral {
+            width: 72px; height: 72px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 20px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 36px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+        .painel-lateral h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        .painel-lateral h2 em {
+            color: var(--verde-neon);
+            font-style: italic;
+        }
+        .painel-lateral p {
+            font-size: 14px;
+            color: rgba(255,255,255,0.65);
+            line-height: 1.7;
+            margin-bottom: 32px;
+        }
+
+        .btn-trocar {
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.25s, transform 0.2s;
+            backdrop-filter: blur(8px);
+        }
+        .btn-trocar:hover {
+            background: rgba(255,255,255,0.22);
+            transform: scale(1.04);
+        }
+
+        .lateral-tag {
+            display: inline-block;
+            background: rgba(116,198,157,0.2);
+            border: 1px solid rgba(116,198,157,0.35);
+            color: var(--verde-neon);
+            padding: 5px 14px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+        }
+
+        /* ─── PAINEL FORMULÁRIO ─── */
+        .painel-form {
+            flex: 1;
+            padding: 48px 44px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* ─── TELAS (login / cadastro) ─── */
+        .tela {
+            position: absolute;
+            inset: 48px 44px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            transition: transform 0.45s cubic-bezier(.77,0,.18,1), opacity 0.35s ease;
+        }
+        .tela.oculta-direita  { transform: translateX(60px);  opacity: 0; pointer-events: none; }
+        .tela.oculta-esquerda { transform: translateX(-60px); opacity: 0; pointer-events: none; }
+        .tela.visivel          { transform: translateX(0);     opacity: 1; pointer-events: all; }
+
+        /* ─── FORM HEADER ─── */
+        .form-header { margin-bottom: 28px; }
+        .form-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--marrom);
+            margin-bottom: 6px;
+        }
+        .form-header h1 span { color: var(--verde); }
+        .form-header p {
+            font-size: 14px;
+            color: var(--cinza);
+        }
+
+        /* ─── CAMPOS ─── */
+        .campo {
+            margin-bottom: 16px;
+            position: relative;
+        }
+        .campo label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--cinza);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 7px;
+        }
+        .campo-inner {
+            position: relative;
+        }
+        .campo-inner .icone-campo {
+            position: absolute;
+            left: 14px; top: 50%;
+            transform: translateY(-50%);
+            font-size: 17px;
+            pointer-events: none;
+        }
+        .campo input {
+            width: 100%;
+            padding: 13px 42px 13px 42px;
+            border: 2px solid var(--creme-escuro);
+            border-radius: 14px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            background: var(--creme);
+            color: var(--marrom);
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .campo input:focus {
+            border-color: var(--verde-claro);
+            box-shadow: 0 0 0 4px rgba(82,183,136,0.12);
+            background: var(--branco);
+        }
+        .campo input::placeholder { color: #C4BEB7; }
+        .campo input.erro { border-color: var(--vermelho); }
+
+        .olho-btn {
+            position: absolute;
+            right: 14px; top: 50%;
+            transform: translateY(-50%);
+            background: none; border: none;
+            cursor: pointer; font-size: 17px;
+            color: var(--cinza);
+            transition: color 0.2s;
+        }
+        .olho-btn:hover { color: var(--verde); }
+
+        /* campos lado a lado */
+        .campos-duplos {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        /* ─── ESQUECEU SENHA ─── */
+        .link-esqueceu {
+            text-align: right;
+            margin-top: -8px;
+            margin-bottom: 20px;
+        }
+        .link-esqueceu a {
+            font-size: 13px;
+            color: var(--verde);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .link-esqueceu a:hover { text-decoration: underline; }
+
+        /* ─── BOTÃO SUBMIT ─── */
+        .btn-submit {
+            width: 100%;
+            background: var(--verde);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 14px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 18px rgba(45,106,79,0.28);
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            margin-bottom: 20px;
+        }
+        .btn-submit:hover {
+            background: #1B4332;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(45,106,79,0.38);
+        }
+
+        /* ─── DIVISOR ─── */
+        .divisor {
+            display: flex; align-items: center; gap: 12px;
+            margin-bottom: 20px;
+        }
+        .divisor hr { flex: 1; border: none; border-top: 1px solid var(--creme-escuro); }
+        .divisor span { font-size: 12px; color: var(--cinza); font-weight: 500; }
+
+        /* ─── LOGIN SOCIAL ─── */
+        .btn-social {
+            width: 100%;
+            background: var(--branco);
+            color: var(--marrom);
+            border: 2px solid var(--creme-escuro);
+            padding: 13px;
+            border-radius: 14px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: border-color 0.2s, background 0.2s;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+        .btn-social:hover { border-color: var(--verde-claro); background: var(--creme); }
+
+        /* ─── MENSAGEM DE ERRO/SUCESSO ─── */
+        .msg {
+            font-size: 13px;
+            font-weight: 600;
+            padding: 11px 16px;
+            border-radius: 10px;
+            margin-bottom: 14px;
+            display: none;
+        }
+        .msg.erro   { background: #FFF0F0; color: var(--vermelho); display: block; }
+        .msg.sucesso { background: #EDFAF3; color: var(--verde); display: block; }
+
+        /* ─── VOLTAR ─── */
+        .link-voltar {
+            position: absolute;
+            top: 20px; left: 24px;
+            text-decoration: none;
+            color: var(--cinza);
+            font-size: 13px;
+            font-weight: 500;
+            display: flex; align-items: center; gap: 6px;
+            transition: color 0.2s;
+        }
+        .link-voltar:hover { color: var(--verde); }
+
+        /* ─── RESPONSIVO ─── */
+        @media (max-width: 700px) {
+            body { align-items: flex-start; padding: 20px 16px; }
+            .wrapper { flex-direction: column; width: 100%; min-height: auto; border-radius: 20px; }
+            .painel-lateral { width: 100%; padding: 36px 28px; }
+            .painel-lateral::before, .painel-lateral::after { display: none; }
+            .painel-form { padding: 36px 28px; }
+            .tela { position: static; transform: none !important; opacity: 1 !important; }
+            .tela.oculta-direita, .tela.oculta-esquerda { display: none; }
+            .campos-duplos { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
-    <header class="cabeçalho">
-        <div class="perfil">
-            <img class="logo" src="imagens/alpha pet.png" alt="">
-            <input class="botao" name="query" placeholder="Procurar na Popular Pet" id="">
-            <div class="imagem-watts">
-                <img class="watts" src="imagens/icon-mensagem.png" alt="Central de atendimento">
-                <p>Central de <br><b>atendimento</b></p>
+
+<!-- BLOBS DE FUNDO -->
+<div class="bg-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+</div>
+
+<div class="wrapper">
+
+    <!-- PAINEL LATERAL -->
+    <div class="painel-lateral" id="painelLateral">
+        <div class="lateral-tag">🐾 Popular Pet</div>
+        <div class="logo-lateral">🐕</div>
+        <h2 id="lateralTitulo">Bem-vindo <em>de volta!</em></h2>
+        <p id="lateralTexto">Acesse sua conta para acompanhar seus pedidos e aproveitar ofertas exclusivas.</p>
+        <button class="btn-trocar" id="btnTrocar" onclick="trocarModo()">
+            <span id="btnTrocarTexto">Criar uma conta</span>
+        </button>
+    </div>
+
+    <!-- PAINEL FORMULÁRIOS -->
+    <div class="painel-form">
+
+        <a class="link-voltar" href="index.html">← Voltar à loja</a>
+
+        <!-- ── TELA LOGIN ── -->
+        <div class="tela visivel" id="telaLogin">
+            <div class="form-header">
+                <h1>Entrar na <span>conta</span></h1>
+                <p>Olá! Informe seus dados para acessar.</p>
             </div>
-            <div class="imagem-boneco">
-                <a href="login.html"><img class="boneco" src="imagens/boneco.png" alt=""></a>
+
+            <div id="msgLogin" class="msg"></div>
+
+            <div class="campo">
+                <label>E-mail</label>
+                <div class="campo-inner">
+                    <span class="icone-campo">✉️</span>
+                    <input type="email" id="loginEmail" placeholder="seu@email.com">
+                </div>
             </div>
-            <div>
-                <a href="carrinho.html"><img class="carrinho" src="imagens/carrinho.png" alt=""></a>
+
+            <div class="campo">
+                <label>Senha</label>
+                <div class="campo-inner">
+                    <span class="icone-campo">🔒</span>
+                    <input type="password" id="loginSenha" placeholder="Sua senha">
+                    <button class="olho-btn" onclick="toggleSenha('loginSenha', this)" tabindex="-1">👁️</button>
+                </div>
             </div>
+
+            <div class="link-esqueceu">
+                <a href="#">Esqueceu sua senha?</a>
+            </div>
+
+            <button class="btn-submit" onclick="fazerLogin()">
+                🚀 Entrar na conta
+            </button>
+
+            <div class="divisor">
+                <hr><span>ou entre com</span><hr>
+            </div>
+
+            <button class="btn-social">
+                <span>🌐</span> Continuar com Google
+            </button>
         </div>
-    </header>
 
-    <nav class="fundo-nav">
-        <div class="navegacao">
-            <ul><a href="index.html">Home</a></ul>
-            <ul><a href="sobre.html">Sobre</a></ul>
-            <ul><a href="Servicos.html">Serviços</a></ul>
-            <ul><a href="produtos.html">Produtos</a></ul>
-            <ul><a href="contato.html">Contato</a></ul>
+        <!-- ── TELA CADASTRO ── -->
+        <div class="tela oculta-direita" id="telaCadastro">
+            <div class="form-header">
+                <h1>Criar <span>conta</span></h1>
+                <p>Rápido e grátis! Preencha os dados abaixo.</p>
+            </div>
+
+            <div id="msgCadastro" class="msg"></div>
+
+            <div class="campos-duplos">
+                <div class="campo">
+                    <label>Nome</label>
+                    <div class="campo-inner">
+                        <span class="icone-campo">👤</span>
+                        <input type="text" id="cadNome" placeholder="Primeiro nome">
+                    </div>
+                </div>
+                <div class="campo">
+                    <label>Sobrenome</label>
+                    <div class="campo-inner">
+                        <span class="icone-campo">👤</span>
+                        <input type="text" id="cadSobrenome" placeholder="Sobrenome">
+                    </div>
+                </div>
+            </div>
+
+            <div class="campo">
+                <label>E-mail</label>
+                <div class="campo-inner">
+                    <span class="icone-campo">✉️</span>
+                    <input type="email" id="cadEmail" placeholder="seu@email.com">
+                </div>
+            </div>
+
+            <div class="campo">
+                <label>Telefone</label>
+                <div class="campo-inner">
+                    <span class="icone-campo">📱</span>
+                    <input type="tel" id="cadTelefone" placeholder="(00) 9 0000-0000" oninput="mascaraTel(this)">
+                </div>
+            </div>
+
+            <div class="campo">
+                <label>Senha</label>
+                <div class="campo-inner">
+                    <span class="icone-campo">🔒</span>
+                    <input type="password" id="cadSenha" placeholder="Mínimo 6 caracteres">
+                    <button class="olho-btn" onclick="toggleSenha('cadSenha', this)" tabindex="-1">👁️</button>
+                </div>
+            </div>
+
+            <button class="btn-submit" onclick="fazerCadastro()">
+                🐾 Criar minha conta
+            </button>
         </div>
-    </nav>
 
-    <section class="fundo-cadastro">
-        <article class="cadastro">
-            <h1>Cadastrar</h1>
-            <form id="form-cadastro">
-                <label for="nome">Nome Completo:</label>
-                <input type="text" id="nome" placeholder="Nome Completo" required>
+    </div><!-- fim painel-form -->
+</div><!-- fim wrapper -->
 
-                <label for="email">Email:</label>
-                <input type="email" id="email" placeholder="Email" required>
+<script>
+    let modoAtual = 'login'; // 'login' | 'cadastro'
 
-                <label for="telefone">Telefone:</label>
-                <input type="tel" id="telefone" placeholder="Telefone" required>
+    /* ── Alterna entre login e cadastro ── */
+    function trocarModo() {
+        const telaLogin    = document.getElementById('telaLogin');
+        const telaCadastro = document.getElementById('telaCadastro');
+        const lateral      = document.getElementById('painelLateral');
+        const titulo       = document.getElementById('lateralTitulo');
+        const texto        = document.getElementById('lateralTexto');
+        const btnTexto     = document.getElementById('btnTrocarTexto');
 
-                <label for="senha">Senha:</label>
-                <input type="password" id="senha" placeholder="Senha" required>
+        if (modoAtual === 'login') {
+            // → cadastro
+            telaLogin.className    = 'tela oculta-esquerda';
+            telaCadastro.className = 'tela visivel';
+            titulo.innerHTML  = 'Já tem uma <em>conta?</em>';
+            texto.textContent = 'Faça login para acessar seus pedidos e benefícios exclusivos da Popular Pet.';
+            btnTexto.textContent  = 'Fazer login';
+            modoAtual = 'cadastro';
+        } else {
+            // → login
+            telaCadastro.className = 'tela oculta-direita';
+            telaLogin.className    = 'tela visivel';
+            titulo.innerHTML  = 'Bem-vindo <em>de volta!</em>';
+            texto.textContent = 'Acesse sua conta para acompanhar seus pedidos e aproveitar ofertas exclusivas.';
+            btnTexto.textContent  = 'Criar uma conta';
+            modoAtual = 'login';
+        }
 
-                <button type="submit">Cadastrar</button>
-            </form>
-            <p id="mensagem" style="color:red;"></p>
-        </article>
-    </section>
+        // limpa mensagens
+        document.getElementById('msgLogin').className    = 'msg';
+        document.getElementById('msgCadastro').className = 'msg';
+    }
 
-    <script>
-        document.getElementById('form-cadastro').addEventListener('submit', function(event) {
-            event.preventDefault(); 
-            
-            
-            const nome = document.getElementById('nome').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const telefone = document.getElementById('telefone').value.trim();
-            const senha = document.getElementById('senha').value.trim();
+    /* ── Mostrar/ocultar senha ── */
+    function toggleSenha(id, btn) {
+        const input = document.getElementById(id);
+        if (input.type === 'password') {
+            input.type = 'text';
+            btn.textContent = '🙈';
+        } else {
+            input.type = 'password';
+            btn.textContent = '👁️';
+        }
+    }
 
-            const mensagem = document.getElementById('mensagem');
-            mensagem.textContent = '';
+    /* ── Máscara telefone ── */
+    function mascaraTel(input) {
+        let v = input.value.replace(/\D/g, '');
+        if (v.length > 11) v = v.slice(0, 11);
+        if (v.length > 6)      v = `(${v.slice(0,2)}) ${v.slice(2,3)} ${v.slice(3,7)}-${v.slice(7)}`;
+        else if (v.length > 2) v = `(${v.slice(0,2)}) ${v.slice(2)}`;
+        input.value = v;
+    }
 
-            if (!nome || !email || !telefone || !senha) {
-                mensagem.textContent = 'Por favor, preencha todos os campos.';
-                return;
-            }
+    /* ── Validações ── */
+    function mostrarMsg(id, tipo, texto) {
+        const el = document.getElementById(id);
+        el.textContent = texto;
+        el.className = `msg ${tipo}`;
+    }
 
-            
-            mensagem.textContent = 'Cadastrado com sucesso!';
-            document.getElementById('form-cadastro').reset(); 
-        });
-    </script>
+    // ── Banco de contas salvo no localStorage ──
+    function getContas() {
+        return JSON.parse(localStorage.getItem('ppContas') || '[]');
+    }
+    function salvarContas(contas) {
+        localStorage.setItem('ppContas', JSON.stringify(contas));
+    }
+
+    function fazerLogin() {
+        const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+        const senha = document.getElementById('loginSenha').value;
+
+        if (!email || !senha) {
+            mostrarMsg('msgLogin', 'erro', '⚠️ Preencha e-mail e senha para continuar.');
+            return;
+        }
+        if (!email.includes('@')) {
+            mostrarMsg('msgLogin', 'erro', '⚠️ Digite um e-mail válido.');
+            return;
+        }
+
+        const contas = getContas();
+        const conta = contas.find(c => c.email === email);
+
+        if (!conta) {
+            mostrarMsg('msgLogin', 'erro', '❌ Nenhuma conta encontrada com este e-mail.');
+            return;
+        }
+        if (conta.senha !== senha) {
+            mostrarMsg('msgLogin', 'erro', '❌ Senha incorreta. Tente novamente.');
+            return;
+        }
+
+        // Login válido — restaura o avatar que foi gerado no cadastro
+        localStorage.setItem('ppUser', JSON.stringify({ nome: conta.nome, avatar: conta.avatar }));
+        mostrarMsg('msgLogin', 'sucesso', `✅ Bem-vindo de volta, ${conta.nome}! Redirecionando...`);
+        setTimeout(() => window.location.href = 'index.html', 1600);
+    }
+
+    function fazerCadastro() {
+        const nome      = document.getElementById('cadNome').value.trim();
+        const sobrenome = document.getElementById('cadSobrenome').value.trim();
+        const email     = document.getElementById('cadEmail').value.trim().toLowerCase();
+        const telefone  = document.getElementById('cadTelefone').value.trim();
+        const senha     = document.getElementById('cadSenha').value;
+
+        if (!nome || !sobrenome || !email || !telefone || !senha) {
+            mostrarMsg('msgCadastro', 'erro', '⚠️ Preencha todos os campos para continuar.');
+            return;
+        }
+        if (!email.includes('@')) {
+            mostrarMsg('msgCadastro', 'erro', '⚠️ Digite um e-mail válido.');
+            return;
+        }
+        if (senha.length < 6) {
+            mostrarMsg('msgCadastro', 'erro', '⚠️ A senha precisa ter pelo menos 6 caracteres.');
+            return;
+        }
+
+        const contas = getContas();
+        if (contas.find(c => c.email === email)) {
+            mostrarMsg('msgCadastro', 'erro', '⚠️ Já existe uma conta com este e-mail. Faça login!');
+            return;
+        }
+
+        // Gera avatar fixo para esta conta
+        const avatares = ['🐶','🐱','🐰','🦊','🐼','🐨','🐯','🦁','🐸','🐧','🦋','🐙'];
+        const avatar = avatares[Math.floor(Math.random() * avatares.length)];
+
+        // Salva a conta no banco local
+        contas.push({ nome, sobrenome, email, telefone, senha, avatar });
+        salvarContas(contas);
+
+        // Inicia sessão
+        localStorage.setItem('ppUser', JSON.stringify({ nome, avatar }));
+        mostrarMsg('msgCadastro', 'sucesso', `✅ Conta criada com sucesso, ${nome}! Redirecionando...`);
+        setTimeout(() => window.location.href = 'index.html', 1800);
+    }
+</script>
+
 </body>
 </html>

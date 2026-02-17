@@ -3,88 +3,679 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Servicos</title>
-    <link rel="stylesheet" href="servicos.css">
+    <title>Serviços — Popular Pet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --verde: #2D6A4F;
+            --verde-claro: #52B788;
+            --verde-neon: #74C69D;
+            --creme: #F8F4EE;
+            --creme-escuro: #EDE8DF;
+            --laranja: #F4845F;
+            --marrom: #3D2B1F;
+            --branco: #FDFCFA;
+            --cinza: #8A8278;
+            --sombra: 0 4px 30px rgba(45,106,79,0.10);
+            --sombra-forte: 0 8px 40px rgba(45,106,79,0.18);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'DM Sans', sans-serif; background: var(--creme); color: var(--marrom); overflow-x: hidden; }
+
+        .barra-topo { background: var(--verde); color: white; text-align: center; padding: 8px 16px; font-size: 13px; font-weight: 500; }
+        .barra-topo span { color: var(--verde-neon); font-weight: 700; }
+
+        header { background: var(--branco); padding: 18px 60px; display: flex; align-items: center; gap: 28px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 20px rgba(0,0,0,0.06); }
+        .logo-area { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .logo-icon { width: 48px; height: 48px; background: var(--verde); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 26px; }
+        .logo-texto strong { display: block; font-family: 'Playfair Display', serif; font-size: 22px; color: var(--verde); font-weight: 900; }
+        .logo-texto span { font-size: 11px; color: var(--cinza); letter-spacing: 1.5px; text-transform: uppercase; }
+        .header-acoes { display: flex; align-items: center; gap: 24px; margin-left: auto; }
+        .acao-item { display: flex; align-items: center; gap: 10px; cursor: pointer; text-decoration: none; color: var(--marrom); transition: color 0.2s; }
+        .acao-item:hover { color: var(--verde); }
+        .acao-item .icone { width: 40px; height: 40px; background: var(--creme); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+        .acao-texto small { display: block; font-size: 10px; color: var(--cinza); text-transform: uppercase; letter-spacing: 0.8px; }
+        .acao-texto strong { font-size: 13px; }
+        .carrinho-btn { position: relative; background: var(--verde); color: white; border: none; width: 46px; height: 46px; border-radius: 14px; font-size: 22px; cursor: pointer; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: background 0.2s; }
+        .carrinho-btn:hover { background: var(--verde-claro); }
+        .carrinho-badge { position: absolute; top: -6px; right: -6px; background: var(--laranja); color: white; width: 20px; height: 20px; border-radius: 50%; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+
+        nav { background: var(--verde); padding: 0 60px; display: flex; align-items: center; gap: 4px; }
+        nav a { color: rgba(255,255,255,0.75); text-decoration: none; font-size: 14px; font-weight: 500; padding: 14px 18px; transition: color 0.2s; position: relative; }
+        nav a:hover, nav a.ativo { color: white; }
+        nav a.ativo::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 30px; height: 3px; background: var(--verde-neon); border-radius: 2px; }
+
+        .hero { background: linear-gradient(135deg, var(--verde) 0%, #1B4332 100%); padding: 70px 60px; position: relative; overflow: hidden; }
+        .hero::before { content: '✂️'; position: absolute; right: 60px; top: 50%; transform: translateY(-50%); font-size: 200px; opacity: 0.06; }
+        .hero-tag { display: inline-block; background: rgba(116,198,157,0.2); color: var(--verde-neon); font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; padding: 6px 16px; border-radius: 50px; border: 1px solid rgba(116,198,157,0.3); margin-bottom: 20px; }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: 52px; font-weight: 900; color: white; line-height: 1.1; margin-bottom: 14px; position: relative; z-index: 2; }
+        .hero h1 em { font-style: normal; color: var(--verde-neon); }
+        .hero p { color: rgba(255,255,255,0.7); font-size: 17px; line-height: 1.7; max-width: 520px; position: relative; z-index: 2; }
+
+        .abas-wrapper { background: var(--branco); padding: 0 60px; border-bottom: 2px solid var(--creme-escuro); display: flex; gap: 0; }
+        .aba { padding: 18px 28px; font-size: 15px; font-weight: 600; cursor: pointer; border: none; background: none; color: var(--cinza); position: relative; transition: color 0.2s; font-family: 'DM Sans', sans-serif; display: flex; align-items: center; gap: 8px; }
+        .aba:hover { color: var(--verde); }
+        .aba.ativa { color: var(--verde); }
+        .aba.ativa::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 3px; background: var(--verde); border-radius: 2px 2px 0 0; }
+        .aba.combo:hover { color: #8B5CF6; }
+        .aba.combo.ativa { color: #8B5CF6; }
+        .aba.combo.ativa::after { background: #8B5CF6; }
+        .combo-badge { background: linear-gradient(135deg, var(--verde-claro), var(--laranja)); color: white; font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 50px; }
+
+        .main-content { max-width: 1200px; margin: 0 auto; padding: 50px 60px; display: grid; grid-template-columns: 1fr 400px; gap: 40px; align-items: start; }
+
+        .form-card { background: var(--branco); border-radius: 28px; padding: 44px; box-shadow: var(--sombra); }
+        .form-header { display: flex; align-items: center; gap: 16px; margin-bottom: 36px; }
+        .form-icone { width: 60px; height: 60px; background: linear-gradient(135deg, var(--verde), var(--verde-claro)); border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 28px; }
+        .form-header h2 { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 900; color: var(--marrom); }
+        .form-header p { font-size: 13px; color: var(--cinza); margin-top: 2px; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .form-group { display: flex; flex-direction: column; gap: 7px; }
+        .form-group.full { grid-column: 1 / -1; }
+        .form-group label { font-size: 12px; font-weight: 700; color: var(--cinza); text-transform: uppercase; letter-spacing: 0.8px; }
+        .form-group input, .form-group textarea { padding: 13px 16px; border: 2px solid var(--creme-escuro); border-radius: 12px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--marrom); background: var(--creme); outline: none; transition: border-color 0.2s, box-shadow 0.2s; }
+        .form-group input:focus, .form-group textarea:focus { border-color: var(--verde-claro); box-shadow: 0 0 0 4px rgba(82,183,136,0.12); background: var(--branco); }
+        .form-group textarea { resize: vertical; min-height: 90px; }
+        .sexo-opcoes { display: flex; gap: 12px; margin-top: 4px; }
+        .sexo-btn { flex: 1; padding: 13px; border: 2px solid var(--creme-escuro); border-radius: 12px; background: var(--creme); font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; color: var(--cinza); }
+        .sexo-btn:hover { border-color: var(--verde-claro); color: var(--verde); }
+        .sexo-btn.selecionado { border-color: var(--verde); background: rgba(45,106,79,0.08); color: var(--verde); }
+
+        /* ── MINI AGENDA ── */
+        .agenda-wrap { grid-column: 1 / -1; display: flex; flex-direction: column; gap: 10px; }
+        .agenda-wrap > label { font-size: 12px; font-weight: 700; color: var(--cinza); text-transform: uppercase; letter-spacing: 0.8px; }
+        .agenda-box { background: var(--creme); border: 2px solid var(--creme-escuro); border-radius: 18px; overflow: hidden; }
+
+        .cal-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; background: var(--branco); border-bottom: 1px solid var(--creme-escuro); }
+        .cal-mes-ano { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: var(--marrom); }
+        .cal-nav { background: none; border: none; width: 32px; height: 32px; border-radius: 10px; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; color: var(--marrom); transition: background 0.2s; }
+        .cal-nav:hover { background: var(--creme-escuro); }
+
+        .cal-semana { display: grid; grid-template-columns: repeat(7,1fr); padding: 10px 14px 4px; gap: 4px; }
+        .cal-semana span { text-align: center; font-size: 11px; font-weight: 700; color: var(--cinza); text-transform: uppercase; }
+
+        .cal-grid { display: grid; grid-template-columns: repeat(7,1fr); padding: 4px 14px 14px; gap: 4px; }
+        .cal-dia { width: 100%; aspect-ratio: 1; border: none; background: none; border-radius: 10px; font-size: 13px; font-weight: 500; cursor: pointer; color: var(--marrom); display: flex; align-items: center; justify-content: center; font-family: 'DM Sans', sans-serif; position: relative; transition: background 0.15s, color 0.15s; }
+        .cal-dia:hover:not(:disabled) { background: var(--creme-escuro); }
+        .cal-dia.hoje { font-weight: 800; color: var(--verde); }
+        .cal-dia.hoje::after { content: ''; position: absolute; bottom: 3px; left: 50%; transform: translateX(-50%); width: 5px; height: 5px; background: var(--verde); border-radius: 50%; }
+        .cal-dia.selecionado { background: var(--verde) !important; color: white !important; font-weight: 700; }
+        .cal-dia.selecionado::after { display: none; }
+        .cal-dia.passado, .cal-dia.sem-vaga { color: #CCC; cursor: not-allowed; }
+        .cal-dia.sem-vaga { text-decoration: line-through; }
+        .cal-dia.tem-vaga::before { content: ''; position: absolute; top: 3px; right: 3px; width: 5px; height: 5px; background: var(--verde-claro); border-radius: 50%; }
+
+        .cal-legenda { display: flex; gap: 16px; padding: 0 14px 12px; flex-wrap: wrap; }
+        .leg-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--cinza); }
+        .leg-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+        .horarios-wrap { border-top: 1px solid var(--creme-escuro); padding: 16px 18px; background: var(--branco); animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+        .horarios-titulo { font-size: 13px; font-weight: 700; color: var(--marrom); margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+        .horarios-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+        .horario-btn { padding: 9px 16px; border: 2px solid var(--creme-escuro); border-radius: 10px; background: var(--creme); font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; color: var(--marrom); transition: all 0.15s; }
+        .horario-btn:hover:not(:disabled) { border-color: var(--verde-claro); color: var(--verde); }
+        .horario-btn.selecionado { border-color: var(--verde); background: var(--verde); color: white; }
+        .horario-btn.ocupado { background: var(--creme-escuro); color: #BBB; cursor: not-allowed; border-color: var(--creme-escuro); text-decoration: line-through; }
+
+        .agenda-resumo { display: none; background: rgba(45,106,79,0.08); border: 2px solid var(--verde-claro); border-radius: 14px; padding: 12px 16px; font-size: 14px; font-weight: 600; color: var(--verde); align-items: center; gap: 10px; }
+        .agenda-resumo.visivel { display: flex; }
+
+        .btn-confirmar { width: 100%; margin-top: 28px; background: linear-gradient(135deg, var(--verde), var(--verde-claro)); color: white; border: none; padding: 18px; border-radius: 16px; font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 700; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .btn-confirmar:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(45,106,79,0.3); }
+
+        /* PAINEL */
+        .painel { display: flex; flex-direction: column; gap: 20px; position: sticky; top: 100px; }
+        .agendamentos-card { background: var(--branco); border-radius: 24px; padding: 28px; box-shadow: var(--sombra); }
+        .agendamentos-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+        .agendamentos-header h3 { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 900; color: var(--marrom); }
+        .badge-count { background: var(--verde); color: white; font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 50px; }
+        .lista-agendamentos { display: flex; flex-direction: column; gap: 12px; max-height: 500px; overflow-y: auto; }
+        .agendamento-item { background: var(--creme); border-radius: 16px; padding: 16px 18px; border-left: 4px solid var(--verde); animation: slideIn 0.4s ease; position: relative; }
+        .agendamento-item.tosa { border-left-color: var(--laranja); }
+        .agendamento-item.combo { border-left-color: #8B5CF6; }
+        @keyframes slideIn { from{opacity:0;transform:translateX(20px);}to{opacity:1;transform:translateX(0);} }
+        .ag-tipo { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px; }
+        .ag-tipo.banho { color: var(--verde); }
+        .ag-tipo.tosa  { color: var(--laranja); }
+        .ag-tipo.combo { color: #8B5CF6; }
+        .ag-nome { font-size: 16px; font-weight: 700; color: var(--marrom); margin-bottom: 6px; }
+        .ag-detalhes { font-size: 12px; color: var(--cinza); display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 6px; }
+        .ag-descricao { font-size: 13px; color: #5A4A40; background: var(--branco); padding: 8px 12px; border-radius: 8px; line-height: 1.5; margin-top: 6px; }
+        .ag-data { display: flex; align-items: center; gap: 6px; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--creme-escuro); font-size: 12px; color: var(--cinza); font-weight: 600; }
+        .ag-remover { position: absolute; top: 12px; right: 12px; background: none; border: none; font-size: 16px; cursor: pointer; opacity: 0.4; transition: opacity 0.2s; }
+        .ag-remover:hover { opacity: 1; }
+        .vazio-msg { text-align: center; padding: 30px 20px; color: var(--cinza); }
+        .vazio-msg .vazio-icone { font-size: 48px; display: block; margin-bottom: 12px; }
+        .vazio-msg p { font-size: 14px; line-height: 1.6; }
+
+        .info-card { background: linear-gradient(135deg, var(--verde), #1B4332); border-radius: 22px; padding: 26px; color: white; }
+        .info-card h4 { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 900; margin-bottom: 14px; }
+        .info-linha { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 10px; font-size: 14px; color: rgba(255,255,255,0.85); }
+        .info-linha:last-child { margin-bottom: 0; }
+
+        .toast { position: fixed; bottom: 30px; right: 30px; background: var(--marrom); color: white; padding: 16px 24px; border-radius: 16px; font-size: 14px; font-weight: 500; display: flex; align-items: center; gap: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.2); z-index: 999; transform: translateY(100px); opacity: 0; transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), opacity 0.3s; }
+        .toast.visivel { transform: translateY(0); opacity: 1; }
+
+        footer { background: var(--marrom); color: rgba(255,255,255,0.6); text-align: center; padding: 30px 60px; font-size: 13px; }
+        footer strong { color: white; }
+
+        @media (max-width: 1000px) {
+            .main-content { grid-template-columns: 1fr; padding: 30px 24px; }
+            header, nav, .abas-wrapper { padding-left: 24px; padding-right: 24px; }
+            .hero { padding: 50px 24px; } .hero h1 { font-size: 38px; }
+            .form-card { padding: 28px 20px; } .painel { position: static; }
+        }
+        @media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } }
+    
+        /* ─── USUÁRIO LOGADO ─── */
+        .usuario-logado { display: flex; align-items: center; gap: 10px; }
+        .usuario-avatar { width: 40px; height: 40px; background: var(--creme); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; border: 2px solid var(--creme-escuro); }
+        .usuario-info small { display: block; font-size: 10px; color: var(--cinza); text-transform: uppercase; letter-spacing: 0.8px; }
+        .usuario-info strong { display: block; font-size: 13px; color: var(--marrom); max-width: 110px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .btn-sair { background: none; border: 2px solid var(--creme-escuro); color: var(--cinza); font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; padding: 6px 14px; border-radius: 50px; cursor: pointer; transition: border-color .2s, color .2s, background .2s; white-space: nowrap; }
+        .btn-sair:hover { border-color: #E63946; color: #E63946; background: #fff5f5; }
+
+    </style>
 </head>
 <body>
 
-    <header class="fundo-servicos">
-        <div class="cabeçalho">
-         <div>
-            <img  class="logo2" src="imagens/alpha pet.png" alt="">
-         </div>
-    
-    
+<div class="barra-topo">🎉 Frete Grátis em compras acima de R$99 • <span>5% off no PIX</span></div>
+
+<header>
+    <a class="logo-area" href="index.html">
+        <div class="logo-icon">🐾</div>
+        <div class="logo-texto"><strong>Popular Pet</strong><span>Pet Shop</span></div>
+    </a>
+    <div class="header-acoes">
+        <a class="acao-item" href="#">
+            <div class="icone">📞</div>
+            <div class="acao-texto"><small>Suporte</small><strong>Atendimento</strong></div>
+        </a>
+        <div id="areaUsuario"></div>
+        <a class="carrinho-btn" href="carrinho.html">🛒<span class="carrinho-badge">0</span></a>
+    </div>
+</header>
+
+<nav>
+    <a href="index.html">🏠 Home</a>
+    <a href="sobre.html">Sobre</a>
+    <a href="Servicos.html" class="ativo">✂️ Serviços</a>
+    <a href="produtos.html">🛍️ Produtos</a>
+    <a href="contato.html">📬 Contato</a>
+</nav>
+
+<section class="hero">
+    <div class="hero-tag">✂️ Agende agora</div>
+    <h1>Nossos <em>Serviços</em></h1>
+    <p>Banho, tosa e muito mais para o seu pet. Profissionais especializados e atendimento com amor. Agende em segundos!</p>
+</section>
+
+<div class="abas-wrapper">
+    <button class="aba ativa" onclick="trocarAba('banho',this)">🛁 Banho</button>
+    <button class="aba" onclick="trocarAba('tosa',this)">✂️ Tosa</button>
+    <button class="aba combo" onclick="trocarAba('combo',this)">🛁✂️ Banho + Tosa <span class="combo-badge">COMBO</span></button>
+</div>
+
+<div class="main-content">
+
+    <!-- ══ BANHO ══ -->
+    <div id="form-banho" class="form-card">
+        <div class="form-header">
+            <div class="form-icone">🛁</div>
+            <div><h2>Agendar Banho</h2><p>Preencha os dados do seu pet</p></div>
         </div>
-        <nav class="fundo-nav">
-            <div class="navegacao">
-            <ul>
-                 <a href="index.html"   rel=""> Home </a> 
-            </ul>
-            <ul>
-                <a href="sobre.html"   rel=""> Sobre </a>
-            </ul>
-            <ul>
-                <a href="Servicos.html"   rel=""> Serviços </a>
-            </ul>
-            <ul>
-                <a href="produtos.html"   rel=""> Produtos </a>
-            </ul>
-            <ul>
-                <a href="contato.html"   rel=""> Contato </a>
-            
-            </ul>
-           <div>
-           
-           
-         </nav>
-   <hr>
-    <section>
-           <h1>Serviços</h1>
-           <hr>
-        <div class="servicos">
-            <div class="descricao-banho">
-                
-                <h2>Banho </h2>  
-                <h3>Nome: <input type="text" name="Nome do Animal" placeholder="Nome do Animal"></h3>
-                <h3>raca: <input type="text" name="raca do Animal" placeholder="raca do Animal"></h3>
-                <h3>Idade: <input type="number" name="Idade do Animal" placeholder="Idade do Animal"></h3>
-                <h3>Peso: <input type="number" name="Peso do Animal" placeholder="Peso do Animal"></h3>
-                <h3>Sexo: Macho<input type="checkbox" name="descricao" id=""> Femea <input type="checkbox" name="descricao" id=""></h3>
-                <h3>Cor: <input type="text" name="Cor do Animal" placeholder="Cor do Animal"></h3>
-                <h3>Descricao do Banho: <br> <textarea name="descricao" id="" cols="30" rows="5"></textarea> </h3>
-                <h3>Agendar: <input type="date" name="data" id=""></h3>
-                <h3>Hora: <input type="time" name="hora" id=""> Da <input type="text" name="data" id=""></h3>
-                <h3><button>CONFIRMAR</button></h3>
-           
-            <hr>
+        <div class="form-grid">
+            <div class="form-group"><label>Nome do Animal *</label><input type="text" id="banho-nome" placeholder="Ex: Rex, Bolinha..."></div>
+            <div class="form-group"><label>Raça</label><input type="text" id="banho-raca" placeholder="Ex: Labrador, SRD..."></div>
+            <div class="form-group"><label>Idade (anos)</label><input type="number" id="banho-idade" placeholder="Ex: 3" min="0" max="30"></div>
+            <div class="form-group"><label>Peso (kg)</label><input type="number" id="banho-peso" placeholder="Ex: 8.5" min="0"></div>
+            <div class="form-group full"><label>Sexo</label>
+                <div class="sexo-opcoes">
+                    <button class="sexo-btn" onclick="selecionarSexo('banho','Macho',this)">♂️ Macho</button>
+                    <button class="sexo-btn" onclick="selecionarSexo('banho','Fêmea',this)">♀️ Fêmea</button>
+                </div>
             </div>
-            <div class="descricao-tosa">
-                <h2>Tosa</h2>
-                <h3>Nome: <input type="text" name="Nome do Animal" placeholder="Nome do Animal"></h3>
-                <h3>raca: <input type="text" name="raca do Animal" placeholder="raca do Animal"></h3>
-                <h3>Idade: <input type="number" name="Idade do Animal" placeholder="Idade do Animal"></h3>
-                <h3>Peso: <input type="number" name="Peso do Animal" placeholder="Peso do Animal"></h3>
-                <h3>Sexo: Macho<input type="checkbox" name="descricao" id=""> Femea <input type="checkbox" name="descricao" id=""></h3>
-                <h3>Cor: <input type="text" name="Cor do Animal" placeholder="Cor do Animal"></h3>
-                <h3>Descricao da Tosa: <br> <textarea name="descricao" id="" cols="30" rows="5"></textarea> </h3>
-                <h3>Agendar: <input type="date" name="data" id=""></h3>
-                <h3>Hora: <input type="time" name="hora" id=""> Da <input type="text" name="data" id=""></h3>
-                <h3><button>CONFIRMAR</button></h3>
+            <div class="form-group"><label>Cor / Pelagem</label><input type="text" id="banho-cor" placeholder="Ex: Caramelo..."></div>
+            <div class="form-group full"><label>Descrição do Banho</label><textarea id="banho-descricao" placeholder="Shampoo especial, observações..."></textarea></div>
+            <div class="agenda-wrap">
+                <label>📅 Escolha o Dia e Horário *</label>
+                <div class="agenda-box" id="agenda-banho"></div>
+                <div class="agenda-resumo" id="resumo-banho"><span>✅</span><span id="resumo-banho-txt"></span></div>
             </div>
-            
         </div>
+        <button class="btn-confirmar" onclick="confirmar('banho')">✅ Confirmar Agendamento de Banho</button>
+    </div>
 
+    <!-- ══ TOSA ══ -->
+    <div id="form-tosa" class="form-card" style="display:none">
+        <div class="form-header">
+            <div class="form-icone" style="background:linear-gradient(135deg,var(--laranja),#E05A3A)">✂️</div>
+            <div><h2>Agendar Tosa</h2><p>Preencha os dados do seu pet</p></div>
+        </div>
+        <div class="form-grid">
+            <div class="form-group"><label>Nome do Animal *</label><input type="text" id="tosa-nome" placeholder="Ex: Rex, Bolinha..."></div>
+            <div class="form-group"><label>Raça</label><input type="text" id="tosa-raca" placeholder="Ex: Poodle, Shih Tzu..."></div>
+            <div class="form-group"><label>Idade (anos)</label><input type="number" id="tosa-idade" placeholder="Ex: 3" min="0" max="30"></div>
+            <div class="form-group"><label>Peso (kg)</label><input type="number" id="tosa-peso" placeholder="Ex: 8.5" min="0"></div>
+            <div class="form-group full"><label>Sexo</label>
+                <div class="sexo-opcoes">
+                    <button class="sexo-btn" onclick="selecionarSexo('tosa','Macho',this)">♂️ Macho</button>
+                    <button class="sexo-btn" onclick="selecionarSexo('tosa','Fêmea',this)">♀️ Fêmea</button>
+                </div>
+            </div>
+            <div class="form-group"><label>Cor / Pelagem</label><input type="text" id="tosa-cor" placeholder="Ex: Caramelo..."></div>
+            <div class="form-group full"><label>Descrição da Tosa</label><textarea id="tosa-descricao" placeholder="Tipo de tosa, comprimento do pelo..."></textarea></div>
+            <div class="agenda-wrap">
+                <label>📅 Escolha o Dia e Horário *</label>
+                <div class="agenda-box" id="agenda-tosa"></div>
+                <div class="agenda-resumo" id="resumo-tosa"><span>✅</span><span id="resumo-tosa-txt"></span></div>
+            </div>
+        </div>
+        <button class="btn-confirmar" style="background:linear-gradient(135deg,var(--laranja),#E05A3A)" onclick="confirmar('tosa')">✅ Confirmar Agendamento de Tosa</button>
+    </div>
 
+    <!-- ══ COMBO ══ -->
+    <div id="form-combo" class="form-card" style="display:none">
+        <div class="form-header">
+            <div class="form-icone" style="background:linear-gradient(135deg,var(--verde-claro),var(--laranja))">🛁✂️</div>
+            <div><h2>Banho + Tosa</h2><p>Combo completo — preencha só uma vez!</p></div>
+        </div>
+        <div style="background:linear-gradient(135deg,rgba(82,183,136,0.12),rgba(244,132,95,0.12));border:2px dashed var(--verde-claro);border-radius:14px;padding:14px 18px;margin-bottom:24px;display:flex;align-items:center;gap:12px">
+            <span style="font-size:24px">🎉</span>
+            <div><strong style="font-size:14px;color:var(--verde)">Você escolheu o Combo!</strong><p style="font-size:12px;color:var(--cinza);margin-top:2px">Banho e tosa juntos com um único cadastro.</p></div>
+        </div>
+        <div class="form-grid">
+            <div class="form-group"><label>Nome do Animal *</label><input type="text" id="combo-nome" placeholder="Ex: Rex, Bolinha..."></div>
+            <div class="form-group"><label>Raça</label><input type="text" id="combo-raca" placeholder="Ex: Labrador, Poodle..."></div>
+            <div class="form-group"><label>Idade (anos)</label><input type="number" id="combo-idade" placeholder="Ex: 3" min="0" max="30"></div>
+            <div class="form-group"><label>Peso (kg)</label><input type="number" id="combo-peso" placeholder="Ex: 8.5" min="0"></div>
+            <div class="form-group full"><label>Sexo</label>
+                <div class="sexo-opcoes">
+                    <button class="sexo-btn" onclick="selecionarSexo('combo','Macho',this)">♂️ Macho</button>
+                    <button class="sexo-btn" onclick="selecionarSexo('combo','Fêmea',this)">♀️ Fêmea</button>
+                </div>
+            </div>
+            <div class="form-group"><label>Cor / Pelagem</label><input type="text" id="combo-cor" placeholder="Ex: Caramelo..."></div>
+            <div class="form-group full"><label>Descrição do Banho</label><textarea id="combo-descricao-banho" placeholder="Shampoo especial, observações do banho..."></textarea></div>
+            <div class="form-group full"><label>Descrição da Tosa</label><textarea id="combo-descricao-tosa" placeholder="Tipo de tosa, comprimento do pelo..."></textarea></div>
+            <div class="agenda-wrap">
+                <label>📅 Escolha o Dia e Horário *</label>
+                <div class="agenda-box" id="agenda-combo"></div>
+                <div class="agenda-resumo" id="resumo-combo"><span>✅</span><span id="resumo-combo-txt"></span></div>
+            </div>
+        </div>
+        <button class="btn-confirmar" style="background:linear-gradient(135deg,var(--verde-claro),var(--laranja))" onclick="confirmar('combo')">✅ Confirmar Combo Banho + Tosa</button>
+    </div>
 
-    </section>
+    <!-- ══ PAINEL ══ -->
+    <div class="painel">
+        <div class="agendamentos-card">
+            <div class="agendamentos-header">
+                <h3>📋 Agendamentos</h3>
+                <span class="badge-count" id="total-count">0</span>
+            </div>
+            <div class="lista-agendamentos" id="lista-agendamentos">
+                <div class="vazio-msg" id="vazio-msg">
+                    <span class="vazio-icone">🐾</span>
+                    <p>Nenhum agendamento ainda.<br>Preencha o formulário ao lado!</p>
+                </div>
+            </div>
+        </div>
+        <div class="info-card">
+            <h4>📍 Informações</h4>
+            <div class="info-linha"><span>📱</span><span>(75) 9 8184-4058</span></div>
+            <div class="info-linha"><span>🕐</span><span>Seg–Sex: 8h às 18h</span></div>
+            <div class="info-linha"><span>📅</span><span>Sáb: 8h às 14h</span></div>
+            <div class="info-linha"><span>📍</span><span>Rua das Flores, 123 — Feira de Santana, BA</span></div>
+        </div>
+    </div>
+</div>
 
+<div class="toast" id="toast">
+    <span id="toast-icone">✅</span>
+    <span id="toast-msg"></span>
+</div>
 
+<footer>
+    <p>© 2024 <strong>Popular Pet</strong> — Todos os direitos reservados. Feito com 🐾 amor.</p>
+</footer>
 
+<script>
+// ══════════════════════════════════════════════════════
+// DADOS: Horários disponíveis por dia
+// Futuramente o Admin vai preencher isso via painel
+// Formato: { "YYYY-MM-DD": ["08:00","09:00",...] }
+// ══════════════════════════════════════════════════════
+const hoje = new Date();
+hoje.setHours(0,0,0,0);
 
-        </header>
+function toKey(d) {
+    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
 
+// Gera horários demo para os próximos 30 dias
+function gerarDemo() {
+    const slots = {};
+    for (let i = 1; i <= 30; i++) {
+        const d = new Date(hoje);
+        d.setDate(d.getDate() + i);
+        if (d.getDay() === 0) continue; // sem domingo
+        const k = toKey(d);
+        slots[k] = d.getDay() === 6
+            ? ['08:00','09:00','10:00','11:00']
+            : ['08:00','09:00','10:00','11:00','14:00','15:00','16:00','17:00'];
+    }
+    return slots;
+}
 
+const horariosDisponiveis = gerarDemo();
+// Horários já reservados (será alimentado pelo backend/admin futuramente)
+const horariosOcupados = {};
 
+// ══════════════════════════════════════════════════════
+// ESTADO
+// ══════════════════════════════════════════════════════
+const TIPOS = ['banho','tosa','combo'];
+const estado = {};
+TIPOS.forEach(t => {
+    estado[t] = {
+        mes: new Date(hoje.getFullYear(), hoje.getMonth(), 1),
+        dia: null,
+        hora: null
+    };
+});
+
+const MESES = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+const DSEM  = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+
+// ══════════════════════════════════════════════════════
+// RENDER CALENDÁRIO
+// ══════════════════════════════════════════════════════
+function renderAgenda(tipo) {
+    const st  = estado[tipo];
+    const mes = st.mes.getMonth();
+    const ano = st.mes.getFullYear();
+    const el  = document.getElementById(`agenda-${tipo}`);
+
+    const primeiroDia = new Date(ano, mes, 1).getDay();
+    const totalDias   = new Date(ano, mes + 1, 0).getDate();
+    const mesMin      = new Date(hoje.getFullYear(), hoje.getMonth(), 1);
+
+    let h = `
+    <div class="cal-header">
+        <button class="cal-nav" onclick="navMes('${tipo}',-1)">◀</button>
+        <span class="cal-mes-ano">${MESES[mes]} ${ano}</span>
+        <button class="cal-nav" onclick="navMes('${tipo}',1)">▶</button>
+    </div>
+    <div class="cal-semana">${DSEM.map(d=>`<span>${d}</span>`).join('')}</div>
+    <div class="cal-grid">`;
+
+    for (let i = 0; i < primeiroDia; i++) h += `<button class="cal-dia" disabled></button>`;
+
+    for (let d = 1; d <= totalDias; d++) {
+        const data = new Date(ano, mes, d);
+        const key  = toKey(data);
+        const passado  = data < hoje;
+        const eHoje    = key === toKey(hoje);
+        const temVaga  = !passado && !!horariosDisponiveis[key];
+        const isSel    = st.dia === key;
+
+        let cls = 'cal-dia';
+        if (passado)       cls += ' passado';
+        else if (!temVaga) cls += ' sem-vaga';
+        else               cls += ' tem-vaga';
+        if (eHoje) cls += ' hoje';
+        if (isSel) cls += ' selecionado';
+
+        const dis = (passado || !temVaga) ? 'disabled' : '';
+        h += `<button class="${cls}" ${dis} onclick="clicarDia('${tipo}','${key}')">${d}</button>`;
+    }
+
+    h += `</div>
+    <div class="cal-legenda">
+        <div class="leg-item"><div class="leg-dot" style="background:var(--verde-claro)"></div>Com vagas</div>
+        <div class="leg-item"><div class="leg-dot" style="background:var(--verde)"></div>Selecionado</div>
+        <div class="leg-item"><div class="leg-dot" style="background:#DDD"></div>Sem vagas</div>
+    </div>`;
+
+    // Horários aparecem ao selecionar um dia
+    if (st.dia && horariosDisponiveis[st.dia]) {
+        const [a,m,d] = st.dia.split('-');
+        h += `<div class="horarios-wrap">
+            <div class="horarios-titulo">🕐 Horários disponíveis — ${d}/${m}/${a}</div>
+            <div class="horarios-grid">`;
+
+        horariosDisponiveis[st.dia].forEach(hr => {
+            const ocupado = (horariosOcupados[st.dia] || []).includes(hr);
+            const selH    = st.hora === hr;
+            let cls = 'horario-btn';
+            if (ocupado) cls += ' ocupado';
+            if (selH)    cls += ' selecionado';
+            h += `<button class="${cls}" ${ocupado?'disabled':''} onclick="clicarHora('${tipo}','${hr}')">${hr}</button>`;
+        });
+
+        h += `</div></div>`;
+    }
+
+    el.innerHTML = h;
+    atualizarResumo(tipo);
+}
+
+function navMes(tipo, delta) {
+    const st = estado[tipo];
+    st.mes = new Date(st.mes.getFullYear(), st.mes.getMonth() + delta, 1);
+    const mesMin = new Date(hoje.getFullYear(), hoje.getMonth(), 1);
+    if (st.mes < mesMin) st.mes = mesMin;
+    renderAgenda(tipo);
+}
+
+function clicarDia(tipo, key) {
+    const st = estado[tipo];
+    st.dia  = key;
+    st.hora = null;
+    renderAgenda(tipo);
+}
+
+function clicarHora(tipo, hora) {
+    estado[tipo].hora = hora;
+    renderAgenda(tipo);
+}
+
+function atualizarResumo(tipo) {
+    const st  = estado[tipo];
+    const box = document.getElementById(`resumo-${tipo}`);
+    const txt = document.getElementById(`resumo-${tipo}-txt`);
+    if (st.dia && st.hora) {
+        const [a,m,d] = st.dia.split('-');
+        txt.textContent = `${d}/${m}/${a} às ${st.hora}`;
+        box.classList.add('visivel');
+    } else if (st.dia) {
+        const [a,m,d] = st.dia.split('-');
+        txt.textContent = `${d}/${m}/${a} — selecione um horário`;
+        box.classList.add('visivel');
+    } else {
+        box.classList.remove('visivel');
+    }
+}
+
+// ══════════════════════════════════════════════════════
+// ABAS
+// ══════════════════════════════════════════════════════
+function trocarAba(tipo, btn) {
+    document.querySelectorAll('.aba').forEach(a => a.classList.remove('ativa'));
+    btn.classList.add('ativa');
+    TIPOS.forEach(t => {
+        document.getElementById(`form-${t}`).style.display = t === tipo ? 'block' : 'none';
+    });
+}
+
+// ══════════════════════════════════════════════════════
+// SEXO
+// ══════════════════════════════════════════════════════
+const sexoSel = { banho:'', tosa:'', combo:'' };
+function selecionarSexo(tipo, valor, btn) {
+    sexoSel[tipo] = valor;
+    btn.closest('.sexo-opcoes').querySelectorAll('.sexo-btn').forEach(b => b.classList.remove('selecionado'));
+    btn.classList.add('selecionado');
+}
+
+// ══════════════════════════════════════════════════════
+// CONFIRMAR AGENDAMENTO
+// ══════════════════════════════════════════════════════
+function confirmar(tipo) {
+    const nome = document.getElementById(`${tipo}-nome`).value.trim();
+    const st   = estado[tipo];
+
+    if (!nome)      { mostrarToast('⚠️','Informe o nome do animal!'); return; }
+    if (!st.dia)    { mostrarToast('⚠️','Selecione um dia na agenda!'); return; }
+    if (!st.hora)   { mostrarToast('⚠️','Selecione um horário disponível!'); return; }
+
+    const raca  = document.getElementById(`${tipo}-raca`).value.trim()  || '–';
+    const idade = document.getElementById(`${tipo}-idade`).value         || '–';
+    const peso  = document.getElementById(`${tipo}-peso`).value          || '–';
+    const cor   = document.getElementById(`${tipo}-cor`).value.trim()    || '–';
+    const sexo  = sexoSel[tipo] || '–';
+
+    let desc = '–', descTosa = null;
+    if (tipo === 'combo') {
+        desc     = document.getElementById('combo-descricao-banho').value.trim() || '–';
+        descTosa = document.getElementById('combo-descricao-tosa').value.trim()  || '–';
+    } else {
+        desc = document.getElementById(`${tipo}-descricao`).value.trim() || '–';
+    }
+
+    const [a,m,d] = st.dia.split('-');
+    const dataFmt = `${d}/${m}/${a}`;
+
+    // Marca horário como ocupado para não aparecer novamente
+    if (!horariosOcupados[st.dia]) horariosOcupados[st.dia] = [];
+    horariosOcupados[st.dia].push(st.hora);
+
+    adicionarCard({ tipo, nome, raca, idade, peso, sexo, cor, desc, descTosa, data: dataFmt, hora: st.hora });
+    mostrarToast('🎉', `${nome} agendado(a) com sucesso!`);
+    limparForm(tipo);
+}
+
+// ══════════════════════════════════════════════════════
+// CARD NA LISTA LATERAL
+// ══════════════════════════════════════════════════════
+function adicionarCard(ag) {
+    const lista = document.getElementById('lista-agendamentos');
+    document.getElementById('vazio-msg')?.remove();
+
+    const id    = Date.now();
+    const item  = document.createElement('div');
+    const label = ag.tipo==='combo' ? '🛁✂️ Banho + Tosa' : ag.tipo==='banho' ? '🛁 Banho' : '✂️ Tosa';
+    item.className = `agendamento-item ${ag.tipo}`;
+    item.id = `ag-${id}`;
+
+    const dBanho = ag.desc   !== '–' ? `<div class="ag-descricao">${ag.tipo==='combo'?'🛁 <strong>Banho:</strong> ':'💬 '}${ag.desc}</div>` : '';
+    const dTosa  = ag.descTosa && ag.descTosa !== '–' ? `<div class="ag-descricao" style="margin-top:6px">✂️ <strong>Tosa:</strong> ${ag.descTosa}</div>` : '';
+
+    item.innerHTML = `
+        <button class="ag-remover" onclick="remover('ag-${id}')">✕</button>
+        <div class="ag-tipo ${ag.tipo}">${label}</div>
+        <div class="ag-nome">🐾 ${ag.nome}</div>
+        <div class="ag-detalhes">
+            ${ag.raca  !=='–'?`<span>🦮 ${ag.raca}</span>`:''}
+            ${ag.idade !=='–'?`<span>📅 ${ag.idade} anos</span>`:''}
+            ${ag.peso  !=='–'?`<span>⚖️ ${ag.peso} kg</span>`:''}
+            ${ag.sexo  !=='–'?`<span>${ag.sexo==='Macho'?'♂️':'♀️'} ${ag.sexo}</span>`:''}
+            ${ag.cor   !=='–'?`<span>🎨 ${ag.cor}</span>`:''}
+        </div>
+        ${dBanho}${dTosa}
+        <div class="ag-data">📅 ${ag.data} às ${ag.hora}</div>`;
+
+    lista.prepend(item);
+    document.getElementById('total-count').textContent = lista.querySelectorAll('.agendamento-item').length;
+}
+
+function remover(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.style.cssText = 'opacity:0;transform:translateX(20px);transition:all 0.3s';
+    setTimeout(() => {
+        el.remove();
+        const lista = document.getElementById('lista-agendamentos');
+        document.getElementById('total-count').textContent = lista.querySelectorAll('.agendamento-item').length;
+        if (!lista.querySelector('.agendamento-item')) {
+            lista.innerHTML = `<div class="vazio-msg" id="vazio-msg"><span class="vazio-icone">🐾</span><p>Nenhum agendamento ainda.<br>Preencha o formulário ao lado!</p></div>`;
+        }
+    }, 300);
+}
+
+// ══════════════════════════════════════════════════════
+// LIMPAR FORMULÁRIO
+// ══════════════════════════════════════════════════════
+function limparForm(tipo) {
+    ['nome','raca','idade','peso','cor'].forEach(c => {
+        const el = document.getElementById(`${tipo}-${c}`);
+        if (el) el.value = '';
+    });
+    if (tipo === 'combo') {
+        document.getElementById('combo-descricao-banho').value = '';
+        document.getElementById('combo-descricao-tosa').value  = '';
+    } else {
+        document.getElementById(`${tipo}-descricao`).value = '';
+    }
+    sexoSel[tipo] = '';
+    document.querySelectorAll(`#form-${tipo} .sexo-btn`).forEach(b => b.classList.remove('selecionado'));
+    estado[tipo].dia  = null;
+    estado[tipo].hora = null;
+    renderAgenda(tipo);
+}
+
+// ══════════════════════════════════════════════════════
+// TOAST
+// ══════════════════════════════════════════════════════
+let toastTimer;
+function mostrarToast(icone, msg) {
+    const t = document.getElementById('toast');
+    document.getElementById('toast-icone').textContent = icone;
+    document.getElementById('toast-msg').textContent   = msg;
+    t.classList.add('visivel');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove('visivel'), 3500);
+}
+
+// ══════════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════════
+TIPOS.forEach(t => renderAgenda(t));
+</script>
+<script>
+
+    /* ─── Sessão do usuário ─── */
+    function renderUsuario() {
+        const area = document.getElementById('areaUsuario');
+        if (!area) return;
+        const raw = localStorage.getItem('ppUser');
+        if (raw) {
+            const user = JSON.parse(raw);
+            area.innerHTML = `
+                <div class="usuario-logado">
+                    <div class="usuario-avatar">${user.avatar}</div>
+                    <div class="usuario-info">
+                        <small>Olá,</small>
+                        <strong>${user.nome}</strong>
+                    </div>
+                    <button class="btn-sair" onclick="sairConta()">Sair</button>
+                </div>`;
+        } else {
+            area.innerHTML = `
+                <a class="acao-item" href="login.html">
+                    <div class="icone">👤</div>
+                    <div class="acao-texto">
+                        <small>Entre ou</small>
+                        <strong>Cadastre-se</strong>
+                    </div>
+                </a>`;
+        }
+    }
+    function sairConta() { localStorage.removeItem('ppUser'); window.location.href = 'login.html'; }
+    renderUsuario();
+
+</script>
 </body>
 </html>

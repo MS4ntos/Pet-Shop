@@ -3,357 +3,999 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Popular Pet</title>
-    <link rel="stylesheet" href="style.css">
-    
+    <title>Popular Pet — Amor em Cada Produto</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --verde: #2D6A4F;
+            --verde-claro: #52B788;
+            --verde-neon: #74C69D;
+            --creme: #F8F4EE;
+            --creme-escuro: #EDE8DF;
+            --laranja: #F4845F;
+            --marrom: #3D2B1F;
+            --branco: #FDFCFA;
+            --cinza: #8A8278;
+            --sombra: 0 4px 30px rgba(45,106,79,0.10);
+            --sombra-forte: 0 8px 40px rgba(45,106,79,0.18);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--creme);
+            color: var(--marrom);
+            overflow-x: hidden;
+        }
+
+        /* ─── BARRA TOPO ─── */
+        .barra-topo {
+            background: var(--verde);
+            color: white;
+            text-align: center;
+            padding: 8px 16px;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+        }
+        .barra-topo span { color: var(--verde-neon); font-weight: 700; }
+
+        /* ─── HEADER ─── */
+        header {
+            background: var(--branco);
+            padding: 18px 60px;
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--verde);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+        }
+        .logo-texto {
+            line-height: 1;
+        }
+        .logo-texto strong {
+            display: block;
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            color: var(--verde);
+            font-weight: 900;
+        }
+        .logo-texto span {
+            font-size: 11px;
+            color: var(--cinza);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .busca-wrapper {
+            flex: 1;
+            max-width: 520px;
+            position: relative;
+        }
+        .busca-wrapper input {
+            width: 100%;
+            padding: 13px 50px 13px 20px;
+            border: 2px solid var(--creme-escuro);
+            border-radius: 50px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            background: var(--creme);
+            color: var(--marrom);
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .busca-wrapper input:focus {
+            border-color: var(--verde-claro);
+            box-shadow: 0 0 0 4px rgba(82,183,136,0.12);
+        }
+        .busca-wrapper input::placeholder { color: var(--cinza); }
+        .busca-btn {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--verde);
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            color: white;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .busca-btn:hover { background: var(--verde-claro); transform: translateY(-50%) scale(1.08); }
+
+        .header-acoes {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            margin-left: auto;
+        }
+        .acao-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--marrom);
+            transition: color 0.2s;
+        }
+        .acao-item:hover { color: var(--verde); }
+        .acao-item .icone {
+            width: 40px;
+            height: 40px;
+            background: var(--creme);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transition: background 0.2s;
+        }
+        .acao-item:hover .icone { background: var(--creme-escuro); }
+        .acao-texto small {
+            display: block;
+            font-size: 10px;
+            color: var(--cinza);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+        .acao-texto strong { font-size: 13px; }
+
+        .carrinho-btn {
+            position: relative;
+            background: var(--verde);
+            color: white;
+            border: none;
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
+            font-size: 22px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s, transform 0.2s;
+            text-decoration: none;
+        }
+        .carrinho-btn:hover { background: var(--verde-claro); transform: scale(1.05); }
+        .carrinho-badge {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            background: var(--laranja);
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            font-size: 11px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ─── USUÁRIO LOGADO ─── */
+        .usuario-logado {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .usuario-avatar {
+            width: 40px; height: 40px;
+            background: var(--creme);
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 22px;
+            border: 2px solid var(--creme-escuro);
+        }
+        .usuario-info small {
+            display: block;
+            font-size: 10px;
+            color: var(--cinza);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+        .usuario-info strong {
+            display: block;
+            font-size: 13px;
+            color: var(--marrom);
+            max-width: 100px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .btn-sair {
+            background: none;
+            border: 2px solid var(--creme-escuro);
+            color: var(--cinza);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: border-color 0.2s, color 0.2s, background 0.2s;
+            white-space: nowrap;
+        }
+        .btn-sair:hover {
+            border-color: #E63946;
+            color: #E63946;
+            background: #fff5f5;
+        }
+
+        /* ─── NAV ─── */
+        nav {
+            background: var(--verde);
+            padding: 0 60px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        nav a {
+            color: rgba(255,255,255,0.75);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 14px 18px;
+            border-radius: 0;
+            transition: color 0.2s, background 0.2s;
+            letter-spacing: 0.3px;
+            position: relative;
+        }
+        nav a:hover, nav a.ativo { color: white; }
+        nav a.ativo::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 3px;
+            background: var(--verde-neon);
+            border-radius: 2px;
+        }
+        nav a:hover::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 3px;
+            background: rgba(116,198,157,0.5);
+            border-radius: 2px;
+        }
+
+        /* ─── HERO ─── */
+        .hero {
+            background: linear-gradient(135deg, var(--verde) 0%, #1B4332 100%);
+            min-height: 520px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            padding: 60px;
+            gap: 40px;
+            overflow: hidden;
+            position: relative;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(116,198,157,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero::after {
+            content: '🐾';
+            position: absolute;
+            bottom: 30px;
+            left: 40px;
+            font-size: 120px;
+            opacity: 0.05;
+        }
+        .hero-conteudo { position: relative; z-index: 2; }
+        .hero-tag {
+            display: inline-block;
+            background: rgba(116,198,157,0.2);
+            color: var(--verde-neon);
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 6px 16px;
+            border-radius: 50px;
+            margin-bottom: 22px;
+            border: 1px solid rgba(116,198,157,0.3);
+        }
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 58px;
+            font-weight: 900;
+            color: white;
+            line-height: 1.08;
+            margin-bottom: 20px;
+        }
+        .hero h1 em {
+            font-style: normal;
+            color: var(--verde-neon);
+        }
+        .hero p {
+            color: rgba(255,255,255,0.7);
+            font-size: 17px;
+            line-height: 1.7;
+            margin-bottom: 36px;
+            max-width: 420px;
+        }
+        .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+        .btn-primario {
+            background: var(--laranja);
+            color: white;
+            border: none;
+            padding: 16px 36px;
+            border-radius: 50px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-primario:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(244,132,95,0.4); }
+        .btn-secundario {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+            padding: 16px 36px;
+            border-radius: 50px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: border-color 0.2s, background 0.2s;
+            text-decoration: none;
+        }
+        .btn-secundario:hover { border-color: white; background: rgba(255,255,255,0.08); }
+
+        .hero-imagem {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .hero-img-frame {
+            width: 420px;
+            height: 380px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 40px 120px 40px 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 160px;
+            border: 2px solid rgba(255,255,255,0.1);
+            animation: float 4s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-14px); }
+        }
+        .hero-stats {
+            display: flex;
+            gap: 32px;
+            margin-top: 40px;
+        }
+        .stat { text-align: left; }
+        .stat strong {
+            display: block;
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            color: white;
+            font-weight: 900;
+        }
+        .stat span {
+            font-size: 12px;
+            color: rgba(255,255,255,0.55);
+            letter-spacing: 0.5px;
+        }
+
+        /* ─── BENEFÍCIOS ─── */
+        .beneficios {
+            background: var(--marrom);
+            padding: 22px 60px;
+            display: flex;
+            gap: 0;
+            overflow-x: auto;
+        }
+        .beneficio-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex: 1;
+            min-width: 180px;
+            padding: 0 30px;
+            border-right: 1px solid rgba(255,255,255,0.1);
+        }
+        .beneficio-item:first-child { padding-left: 0; }
+        .beneficio-item:last-child { border-right: none; }
+        .beneficio-icone {
+            font-size: 28px;
+            min-width: 40px;
+        }
+        .beneficio-texto strong {
+            display: block;
+            color: white;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .beneficio-texto span {
+            font-size: 11px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        /* ─── CATEGORIAS ─── */
+        .secao { padding: 70px 60px; }
+        .secao-titulo {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+        .secao-titulo h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 38px;
+            font-weight: 900;
+            color: var(--marrom);
+            line-height: 1.1;
+        }
+        .secao-titulo h2 span { color: var(--verde); }
+        .ver-tudo {
+            color: var(--verde);
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: gap 0.2s;
+        }
+        .ver-tudo:hover { gap: 10px; }
+
+        .grid-categorias {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        .card-categoria {
+            background: var(--branco);
+            border-radius: 24px;
+            padding: 32px 24px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 2px solid transparent;
+            text-decoration: none;
+            color: var(--marrom);
+            display: block;
+        }
+        .card-categoria:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--sombra-forte);
+            border-color: var(--verde-claro);
+        }
+        .cat-emoji { font-size: 52px; margin-bottom: 16px; display: block; }
+        .card-categoria h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+        .card-categoria p {
+            font-size: 12px;
+            color: var(--cinza);
+        }
+        .cat-tag {
+            display: inline-block;
+            background: var(--creme-escuro);
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--verde);
+            margin-top: 12px;
+        }
+
+        /* ─── PRODUTOS ─── */
+        .fundo-produtos { background: var(--creme-escuro); }
+        .grid-produtos {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 22px;
+        }
+        .card-produto {
+            background: var(--branco);
+            border-radius: 22px;
+            overflow: hidden;
+            transition: transform 0.25s, box-shadow 0.25s;
+            cursor: pointer;
+            position: relative;
+        }
+        .card-produto:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--sombra-forte);
+        }
+        .produto-img-wrap {
+            background: var(--creme);
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 90px;
+            position: relative;
+            overflow: hidden;
+        }
+        .badge-desconto {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            background: var(--laranja);
+            color: white;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 50px;
+        }
+        .badge-frete {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            background: var(--verde);
+            color: white;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 50px;
+        }
+        .produto-info { padding: 18px 20px 20px; }
+        .produto-nome {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--marrom);
+            margin-bottom: 4px;
+            line-height: 1.3;
+        }
+        .produto-preco {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--verde);
+            margin: 10px 0 4px;
+        }
+        .produto-preco-info {
+            font-size: 11px;
+            color: var(--cinza);
+            margin-bottom: 14px;
+        }
+        .btn-comprar {
+            width: 100%;
+            background: var(--verde);
+            color: white;
+            border: none;
+            padding: 13px;
+            border-radius: 14px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.15s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .btn-comprar:hover { background: var(--verde-claro); transform: scale(1.02); }
+
+        /* ─── BANNER PROMO ─── */
+        .banner-promo {
+            margin: 0 60px 70px;
+            background: linear-gradient(135deg, var(--laranja), #E05A3A);
+            border-radius: 28px;
+            padding: 50px 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            overflow: hidden;
+            position: relative;
+        }
+        .banner-promo::before {
+            content: '🎁';
+            position: absolute;
+            right: 40px;
+            font-size: 130px;
+            opacity: 0.15;
+        }
+        .banner-conteudo h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 40px;
+            color: white;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+        .banner-conteudo p { color: rgba(255,255,255,0.85); font-size: 16px; }
+        .btn-banner {
+            background: white;
+            color: var(--laranja);
+            border: none;
+            padding: 16px 36px;
+            border-radius: 50px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s;
+            white-space: nowrap;
+        }
+        .btn-banner:hover { transform: scale(1.05); }
+
+        /* ─── FOOTER ─── */
+        footer {
+            background: var(--marrom);
+            color: rgba(255,255,255,0.6);
+            text-align: center;
+            padding: 30px 60px;
+            font-size: 13px;
+        }
+        footer strong { color: white; }
+
+        /* ─── ANIMAÇÕES ─── */
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hero-conteudo { animation: slideUp 0.7s ease forwards; }
+        .hero-imagem { animation: slideUp 0.9s ease forwards; }
+
+        /* ─── RESPONSIVO ─── */
+        @media (max-width: 900px) {
+            header, nav, .secao { padding-left: 24px; padding-right: 24px; }
+            .hero { grid-template-columns: 1fr; padding: 40px 24px; }
+            .hero-imagem { display: none; }
+            .hero h1 { font-size: 40px; }
+            .grid-categorias, .grid-produtos { grid-template-columns: repeat(2, 1fr); }
+            .banner-promo { margin: 0 24px 50px; flex-direction: column; gap: 24px; padding: 40px 30px; }
+            .beneficios { padding: 16px 24px; }
+        }
+    </style>
 </head>
 <body>
-   
-    
 
+<!-- BARRA TOPO -->
+<div class="barra-topo">
+    🎉 Frete Grátis em compras acima de R$99 • <span>5% off no PIX</span>
+</div>
 
-    
-  <header class="cabeçalho">
-    
-    <img class="foto" src="imagens/with-icons.webp" alt="" id="mode-tema">
-    <div class="perfil">
-    <img class="logo" src="imagens/alpha pet.png" alt="">
-   
-    <input  class="botao"  name="query" placeholder="Procurar na Popular Pet " id="">
-    <div class="imagem-watts">
-        <img class="watts" src="imagens/icon-mensagem.png" alt="Central de atendimento ">
-        <p>Central de <br><b>atendimento</b></p>
-    </div>
-   
+<!-- HEADER -->
+<header>
+    <a class="logo-area" href="index.html">
+        <div class="logo-icon">🐾</div>
+        <div class="logo-texto">
+            <strong>Popular Pet</strong>
+            <span>Pet Shop</span>
+        </div>
+    </a>
 
-
-    <div class="imagem-boneco">
-
-        <a href="login.html"><img class="boneco" src="imagens/boneco.png"  alt =""></a>
-        <p><b>Entre</b> ou <br><b>Cadastre-se</b></p>
-
+    <div class="busca-wrapper">
+        <input type="text" placeholder="Buscar produtos, marcas, categorias...">
+        <button class="busca-btn">🔍</button>
     </div>
 
-   <div>
-    <a href="carrinho.html"> <img  class="carrinho" src="imagens/carrinho.png" alt=""></a>
-   </div>
-   
- </div>
-
-  </header>
-
-
- <nav class="fundo-nav">
-    <div class="navegacao">
-    <ul>
-         <a href="index.html"   rel=""> Home </a> 
-    </ul>
-    <ul>
-        <a href="sobre.html"   rel=""> Sobre </a>
-    </ul>
-    <ul>
-        <a href="Servicos.html"   rel=""> Serviços </a>
-    </ul>
-    <ul>
-        <a href="produtos.html"   rel=""> Produtos </a>
-    </ul>
-    <ul>
-        <a href="contato.html"  rel=""> Contato </a>
-    
-    </ul>
-   <div>
-   
-   
- </nav>
-
-
-
- 
- <div class="imagem-pet">
-    
-    <img class="pet" src="imagens/imagem-pet.webp" alt="" >
- </div>
-
-
- <section class="fundo-cards">
-
-     <div class="fundo-card1">
-        <img class="imagem-caminhao" src="imagens/caminhao.png" alt="">
-            <p><b>Entrega Express</b><br> 7 dias<br></p>
-      </div>
-
-        <div class="fundo-card2">
-            <img class="imagem-caixa" src="imagens/caixa.png" alt="">
-            <p><b>Frete Gratis <br></b>Express e Correios <br> </p>
-        </div>
-
-        <div class="fundo-card3">
-            <img class="imagem-cartao" src="imagens/cartao.png" alt="">
-            <p><b>Parcele em 6x</b> <br>Parcela Minima de <br> 60,00R$</p>
-        </div>
-
-        <div class="fundo-card4">
-            <img class="imagem-dinheiro" src="imagens/dinheiro.png" alt="">
-            <p><b>Cashback</b> <br>Utilize na sua <br>proxima compra</p>
-        </div>
-
-        <div class="fundo-card5">
-            <img class="imagem-loja" src="imagens/loja.png" alt="">
-            <p><b>Compre e Retire</b> <br>5% de desconto <br>*confira as lojas</p>
-        </div>
-
-        <div class="fundo-card6">
-            <img class = "imagem-pix" src ="imagens/pix.png" alt="">
-            <p><b>5% off no PIX</b> <br>(exceto Premier e  <br>Golden)</p>
-        </div>
- 
- </section>
-
-
-
- <nav class="fundo-categorias">
-    <div class="plano-categoria">
-    <h1>Categorias </h1>
-       </div>
-   <div class="Categorias-Populares">
-    <div>
-       <img class="cachorro" src="imagens/cachorro.jpg" alt="" id="cachorro" >
-       
-         <p class="texto-racao-cachorro"><b>Ração Para cachorro</b></p>
+    <div class="header-acoes">
+        <a class="acao-item" href="#">
+            <div class="icone">📞</div>
+            <div class="acao-texto">
+                <small>Suporte</small>
+                <strong>Atendimento</strong>
+            </div>
+        </a>
+        <div id="areaUsuario"></div>
+        <a class="carrinho-btn" href="carrinho.html">
+            🛒
+            <span class="carrinho-badge" id="cart-count">0</span>
+        </a>
     </div>
-   
-   <div>
-       <img class="gato" src="imagens/gato.jpg" alt="">
-         <p class="texto-racao-gato"><b>Ração Para gato</b></p>
-   </div>
+</header>
 
-   <div>
-        <img class="acessorios" src="imagens/acessorios.jpg"alt="">
-         <p class="texto-acessorios"><b>Acessórios</p>
-   </div>
-
-   <div>
-        <img class="Servicos" src="imagens/serviços.jpeg" alt="">
-         <p class="texto-servico"><b>Serviços</p>
-   </div>
-
-   </div>
+<!-- NAV -->
+<nav>
+    <a href="index.html" class="ativo">🏠 Home</a>
+    <a href="sobre.html">Sobre</a>
+    <a href="Servicos.html">✂️ Serviços</a>
+    <a href="produtos.html">🛍️ Produtos</a>
+    <a href="contato.html">📬 Contato</a>
 </nav>
 
-
- 
-
-<section class="fundo-produtos">
-    <h1>Produtos</h1>
-<div id="productList" class="fundo-cards-produtos">
- 
-    <div class="plano-produtos">
-    <div class="texto-desconto">
-        <p>24% OFF</p>
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-conteudo">
+        <div class="hero-tag">✨ Novidades toda semana</div>
+        <h1>Tudo que seu <em>Pet</em> merece</h1>
+        <p>Rações premium, acessórios e serviços com amor. Entrega expressa em 7 dias e frete grátis nos seus pedidos.</p>
+        <div class="hero-btns">
+            <a class="btn-primario" href="produtos.html">🛍️ Ver Produtos</a>
+            <a class="btn-secundario" href="Servicos.html">Nossos Serviços</a>
+        </div>
+        <div class="hero-stats">
+            <div class="stat">
+                <strong>2.400+</strong>
+                <span>Produtos</span>
+            </div>
+            <div class="stat">
+                <strong>98%</strong>
+                <span>Satisfação</span>
+            </div>
+            <div class="stat">
+                <strong>7 dias</strong>
+                <span>Entrega Express</span>
+            </div>
+        </div>
     </div>
-    <div>
-        <img  class="imagem-racao" src="imagens/imagem-racao.webp" alt="">
+    <div class="hero-imagem">
+        <div class="hero-img-frame">🐕</div>
     </div>
-
-    <div>
-        <input class="botao2" type="button" value="Frete Gratis">
-    </div>
-
-    <div class="descricao-produto">
-        <p>Ração Para Cachorro  PEDIGREE </p>
-    </div>
-
-    <div class="preco">
-        <p> R$ 10,50 (pix)</p>
-
-       
-    </div>
-
-    <div>
-        <input class="botao4"  type="button" value ="R$ 1,00 de Cashback">
-    </div>
-
-    <div>
-        <input class="botao5" type="button" value="Comprar" onclick="addToCart('Ração Para Cachorro', 10.50, 1)">
-    </div>
-    
- </div>
-
-
-
-
- 
- <div class="plano-acessorios">
-    <div class="texto-desconto2">
-        <p>15% OFF</p>
-    </div>
-    <div>
-        <img  class="imagem-acessorio" src="imagens/pote.avif" alt="">
-    </div>
-
-    <div>
-        <input class="botao3" type="button" value="Frete Gratis">
-    </div>
-
-    <div class="descricao-produto2">
-        <p>Pote Grande </p>
-    </div>
-
-    <div class="preco2">
-        <p> R$ 15,50 (pix)</p>
-
-       
-    </div>
-
-    <div>
-        <input class="botao6"  type="button" value ="R$ 2,00 de Cashback">
-    </div>
-
-    <div>
-        <input class="botao7" type="button" value="Comprar" onclick="addToCart('Pote Grande', 15.50, 1)">
-    </div>
-    
- </div>
-
-
-
-
-
-
- <div class="plano-servicos">
-    <div class="texto-desconto3">
-        <p>35% OFF</p>
-    </div>
-    <div>
-        <img  class="imagem-servico" src="imagens/Racao-Para-Coelho.png" alt="">
-    </div>
-
-    <div>
-        <input class="botao8" type="button" value="Frete Gratis">
-    </div>
-
-    <div class="descricao-produto3">
-        <p>Ração para Coelho </p>
-    </div>
-
-    <div class="preco3">
-        <p> R$ 45,00 (pix)</p>
-
-       
-    </div>
-
-    <div>
-        <input class="botao9"  type="button" value ="R$ 5,00 de Cashback">
-    </div>
-
-    <div>
-        <input class="botao10" type="button" value="Comprar" onclick="addToCart('Ração Para Coelho', 45.00, 1)" >
-    </div>
-    
- </div>
-
-
-
-
-
-
- <div class="plano-racao-gato">
-    <div class="texto-desconto4">
-        <p>18% OFF</p>
-    </div>
-    <div>
-        <img  class="imagem-racao-gato" src="imagens/gato2.jpeg" alt="">
-    </div>
-
-    <div>
-        <input class="botao11" type="button" value="Frete Gratis">
-    </div>
-
-    <div class="descricao-produto4">
-        <p>Ração Para Gato WHISKAS</p>
-    </div>
-
-    <div class="preco4">
-        <p> R$ 13,80 (pix)</p>
-
-       
-    </div>
-
-    <div>
-        <input class="botao12"  type="button" value ="R$ 5,90 de Cashback">
-    </div>
-
-    <div>
-        <input class="botao13" type="button" value="Comprar" onclick="addToCart('Ração Para Gato WHISKAS', 13.80, 1)">
-    </div>
-    
-    
- </div>
-
-</div>
-
 </section>
 
-<div class="container">
-   
-
-    <footer>
-        <p>&copy; 2024 Seu Site. Todos os direitos reservados.</p>
-    </footer>
+<!-- BENEFÍCIOS -->
+<div class="beneficios">
+    <div class="beneficio-item">
+        <div class="beneficio-icone">🚚</div>
+        <div class="beneficio-texto">
+            <strong>Entrega Express</strong>
+            <span>Em até 7 dias úteis</span>
+        </div>
+    </div>
+    <div class="beneficio-item">
+        <div class="beneficio-icone">📦</div>
+        <div class="beneficio-texto">
+            <strong>Frete Grátis</strong>
+            <span>Express e Correios</span>
+        </div>
+    </div>
+    <div class="beneficio-item">
+        <div class="beneficio-icone">💳</div>
+        <div class="beneficio-texto">
+            <strong>Parcele em 6x</strong>
+            <span>Mínimo de R$60</span>
+        </div>
+    </div>
+    <div class="beneficio-item">
+        <div class="beneficio-icone">🏪</div>
+        <div class="beneficio-texto">
+            <strong>Compre e Retire</strong>
+            <span>5% de desconto na loja</span>
+        </div>
+    </div>
+    <div class="beneficio-item">
+        <div class="beneficio-icone">⚡</div>
+        <div class="beneficio-texto">
+            <strong>5% off no PIX</strong>
+            <span>Exceto Premier e Golden</span>
+        </div>
+    </div>
 </div>
 
+<!-- CATEGORIAS -->
+<section class="secao">
+    <div class="secao-titulo">
+        <h2>Categorias <span>Populares</span></h2>
+        <a class="ver-tudo" href="produtos.html">Ver todas →</a>
+    </div>
+    <div class="grid-categorias">
+        <a class="card-categoria" href="produtos.html">
+            <span class="cat-emoji">🐕</span>
+            <h3>Ração para Cachorro</h3>
+            <p>As melhores marcas</p>
+            <span class="cat-tag">Ver produtos</span>
+        </a>
+        <a class="card-categoria" href="produtos.html">
+            <span class="cat-emoji">🐈</span>
+            <h3>Ração para Gato</h3>
+            <p>Premium e econômico</p>
+            <span class="cat-tag">Ver produtos</span>
+        </a>
+        <a class="card-categoria" href="produtos.html">
+            <span class="cat-emoji">🦮</span>
+            <h3>Acessórios</h3>
+            <p>Coleiras, brinquedos e mais</p>
+            <span class="cat-tag">Ver produtos</span>
+        </a>
+        <a class="card-categoria" href="Servicos.html">
+            <span class="cat-emoji">✂️</span>
+            <h3>Serviços</h3>
+            <p>Banho, tosa e consultas</p>
+            <span class="cat-tag">Agendar</span>
+        </a>
+    </div>
+</section>
+
+<!-- PRODUTOS -->
+<section class="secao fundo-produtos">
+    <div class="secao-titulo">
+        <h2>Produtos em <span>Destaque</span></h2>
+        <a class="ver-tudo" href="produtos.html">Ver todos →</a>
+    </div>
+    <div class="grid-produtos" id="productList">
+
+        <div class="card-produto">
+            <div class="produto-img-wrap">
+                🦴
+                <span class="badge-desconto">24% OFF</span>
+                <span class="badge-frete">🚚 Frete Grátis</span>
+            </div>
+            <div class="produto-info">
+                <p class="produto-nome">Ração Para Cachorro PEDIGREE</p>
+                <div class="produto-preco">R$ 10,50</div>
+                <p class="produto-preco-info">no PIX</p>
+                <button class="btn-comprar" onclick="addToCart('Ração Para Cachorro PEDIGREE', 10.50, 1)">
+                    🛒 Comprar
+                </button>
+            </div>
+        </div>
+
+        <div class="card-produto">
+            <div class="produto-img-wrap">
+                🥣
+                <span class="badge-desconto">15% OFF</span>
+                <span class="badge-frete">🚚 Frete Grátis</span>
+            </div>
+            <div class="produto-info">
+                <p class="produto-nome">Pote Grande para Ração</p>
+                <div class="produto-preco">R$ 15,50</div>
+                <p class="produto-preco-info">no PIX</p>
+                <button class="btn-comprar" onclick="addToCart('Pote Grande', 15.50, 1)">
+                    🛒 Comprar
+                </button>
+            </div>
+        </div>
+
+        <div class="card-produto">
+            <div class="produto-img-wrap">
+                🐇
+                <span class="badge-desconto">35% OFF</span>
+                <span class="badge-frete">🚚 Frete Grátis</span>
+            </div>
+            <div class="produto-info">
+                <p class="produto-nome">Ração para Coelho</p>
+                <div class="produto-preco">R$ 45,00</div>
+                <p class="produto-preco-info">no PIX</p>
+                <button class="btn-comprar" onclick="addToCart('Ração Para Coelho', 45.00, 1)">
+                    🛒 Comprar
+                </button>
+            </div>
+        </div>
+
+        <div class="card-produto">
+            <div class="produto-img-wrap">
+                🐱
+                <span class="badge-desconto">18% OFF</span>
+                <span class="badge-frete">🚚 Frete Grátis</span>
+            </div>
+            <div class="produto-info">
+                <p class="produto-nome">Ração Para Gato WHISKAS</p>
+                <div class="produto-preco">R$ 13,80</div>
+                <p class="produto-preco-info">no PIX</p>
+                <button class="btn-comprar" onclick="addToCart('Ração Para Gato WHISKAS', 13.80, 1)">
+                    🛒 Comprar
+                </button>
+            </div>
+        </div>
+
+    </div>
+</section>
+    <button class="btn-banner">Saiba mais →</button>
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <p>© 2024 <strong>Popular Pet</strong> — Todos os direitos reservados. Feito com 🐾 amor.</p>
+</footer>
+
 <script>
-    function addToCart(productName, price, quantity) {
-    
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-    
-    const existingProductIndex = cart.findIndex(item => item.name === productName);
-
-    if (existingProductIndex > -1) {
-        
-        cart[existingProductIndex].quantity += quantity;
-        cart[existingProductIndex].subtotal = (cart[existingProductIndex].price * cart[existingProductIndex].quantity).toFixed(2);
-    } else {
-        
-        const product = {
-            name: productName,
-            price: price,
-            quantity: quantity,
-            subtotal: (price * quantity).toFixed(2) 
-        };
-        cart.push(product);
+    /* ─── Sessão do usuário ─── */
+    function renderUsuario() {
+        const area = document.getElementById('areaUsuario');
+        if (!area) return;
+        const raw = localStorage.getItem('ppUser');
+        if (raw) {
+            const user = JSON.parse(raw);
+            area.innerHTML = `
+                <div class="usuario-logado">
+                    <div class="usuario-avatar">${user.avatar}</div>
+                    <div class="usuario-info">
+                        <small>Olá,</small>
+                        <strong>${user.nome}</strong>
+                    </div>
+                    <button class="btn-sair" onclick="sairConta()">Sair</button>
+                </div>`;
+        } else {
+            area.innerHTML = `
+                <a class="acao-item" href="login.html">
+                    <div class="icone">👤</div>
+                    <div class="acao-texto">
+                        <small>Entre ou</small>
+                        <strong>Cadastre-se</strong>
+                    </div>
+                </a>`;
+        }
     }
 
-    
-    localStorage.setItem('cart', JSON.stringify(cart));
+    function sairConta() {
+        localStorage.removeItem('ppUser');
+        window.location.href = 'login.html';
+    }
 
-    
-    window.location.href = 'carrinho.html';
-}
+    function updateCartCount() {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const total = cart.reduce((sum, item) => sum + item.quantity, 0);
+        document.getElementById('cart-count').textContent = total;
+    }
 
+    function addToCart(productName, price, quantity) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const idx = cart.findIndex(item => item.name === productName);
+        if (idx > -1) {
+            cart[idx].quantity += quantity;
+            cart[idx].subtotal = (cart[idx].price * cart[idx].quantity).toFixed(2);
+        } else {
+            cart.push({ name: productName, price, quantity, subtotal: (price * quantity).toFixed(2) });
+        }
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartCount();
+        
+        // feedback visual
+        const btn = event.target;
+        const original = btn.innerHTML;
+        btn.innerHTML = '✅ Adicionado!';
+        btn.style.background = '#52B788';
+        setTimeout(() => {
+            btn.innerHTML = original;
+            btn.style.background = '';
+            window.location.href = 'carrinho.html';
+        }, 800);
+    }
+
+    updateCartCount();
+    renderUsuario();
 </script>
-
-<script>
-    document.querySelector('#mode-tema').addEventListener('click', () => {
-      const body = document.querySelector('body');
-      const button = document.querySelector('#mode-tema');
-      
-      body.classList.toggle('dark-mode');
-      
-      
-      if (body.classList.contains('dark-mode')) {
-      
-        button.textContent = 'Dark Mode';
-        button.textContent = '';
-       
-          
-      } else {
-        button.textContent = '';
-      }
-    });
-  </script>
-
 
 </body>
 </html>
